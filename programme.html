@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le programme — Les Curieuses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  nav { background: var(--violet); }
+
+  /* LEVIERS */
+  .leviers { background: var(--white); }
+  .leviers-list { display: flex; flex-direction: column; gap: 0; margin-top: 64px; }
+  .levier-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+    padding: 56px 0;
+    border-bottom: 1px solid rgba(45,27,105,0.08);
+  }
+  .levier-row:last-child { border-bottom: none; }
+  .levier-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3.5rem;
+    color: var(--rose);
+    line-height: 1;
+  }
+  .levier-row-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    color: var(--violet);
+    margin-bottom: 12px;
+  }
+  .levier-row-desc { color: var(--text-muted); line-height: 1.8; }
+  .levier-detail { padding-top: 4px; }
+  .levier-detail ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .levier-detail li {
+    display: flex; gap: 12px; align-items: flex-start;
+    font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;
+  }
+  .levier-detail li::before {
+    content: '✦';
+    color: var(--rose-deep);
+    font-size: 0.6rem;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  /* DOMAINES */
+  .domaines { background: var(--violet); }
+  .domaines .section-title { color: var(--white); }
+  .domaines .section-eyebrow { color: var(--gold); }
+  .domaines .section-sub { color: rgba(255,255,255,0.6); }
+  .domaines-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 56px;
+  }
+  .domaine-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 24px 20px;
+    transition: background 0.2s, transform 0.2s;
+    cursor: default;
+  }
+  .domaine-card:hover { background: rgba(255,255,255,0.14); transform: translateY(-3px); }
+  .domaine-icon { font-size: 1.6rem; margin-bottom: 12px; }
+  .domaine-name { font-weight: 600; color: var(--white); font-size: 0.9375rem; margin-bottom: 6px; }
+  .domaine-ex { font-size: 0.8125rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+  /* MODELE */
+  .modele { background: var(--cream); }
+  .modele-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    margin-top: 56px;
+  }
+  .financement-list { display: flex; flex-direction: column; gap: 16px; }
+  .financement-item {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 24px 28px;
+    display: flex; gap: 20px; align-items: flex-start;
+    transition: transform 0.15s;
+  }
+  .financement-item:hover { transform: translateX(4px); }
+  .financement-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--rose-deep);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+  .financement-title { font-weight: 600; color: var(--violet); font-size: 0.9375rem; margin-bottom: 6px; }
+  .financement-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+
+  .gratuit-card {
+    background: var(--violet);
+    border-radius: 20px;
+    padding: 48px 44px;
+    position: sticky;
+    top: 100px;
+  }
+  .gratuit-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--violet);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 100px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .gratuit-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.75rem;
+    color: var(--white);
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+  .gratuit-desc { font-size: 0.9375rem; color: rgba(255,255,255,0.65); line-height: 1.8; margin-bottom: 32px; }
+  .materiel-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+  .materiel-item { display: flex; gap: 12px; align-items: center; font-size: 0.875rem; color: rgba(255,255,255,0.7); }
+  .materiel-item::before { content: '◎'; color: var(--gold); font-size: 0.65rem; }
+
+  /* PUBLIC CIBLE */
+  .public { background: var(--white); }
+  .ages-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+  .age-card {
+    background: var(--cream);
+    border-radius: 16px;
+    padding: 36px 28px;
+    border-top: 3px solid var(--rose-deep);
+    transition: transform 0.2s;
+  }
+  .age-card:hover { transform: translateY(-4px); }
+  .age-range {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--violet);
+    margin-bottom: 8px;
+  }
+  .age-level { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rose-deep); margin-bottom: 16px; }
+  .age-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; }
+  .age-ateliers { margin-top: 16px; }
+  .age-ateliers span {
+    display: inline-block;
+    background: var(--violet-pale);
+    color: var(--violet);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin: 3px 3px 0 0;
+  }
+
+  @media (max-width: 768px) {
+    .levier-row { grid-template-columns: 1fr; gap: 16px; }
+    .levier-number { font-size: 2.5rem; }
+    .modele-layout { grid-template-columns: 1fr; }
+    .gratuit-card { position: static; }
+    .ages-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<div class="page-header">
+  <p class="page-header-eyebrow">Le programme</p>
+  <h1>Comment Les Curieuses <em>agit</em></h1>
+  <p class="page-header-sub">Une intervention directe en classe, animée par des étudiant.es ingénieur.es ou des ingénieur.es sur trois leviers simultanés.</p>
+</div>
+
+<!-- LEVIERS -->
+<section class="leviers" id="leviers">
+  <div class="container">
+    <p class="section-eyebrow reveal">Notre méthode</p>
+    <h2 class="section-title reveal">Trois leviers, un seul objectif</h2>
+    <p class="section-sub reveal" style="max-width: 560px;">Là où la plupart des initiatives restent ponctuelles, nous intégrons la déconstruction des stéréotypes dans le système même.</p>
+    <div class="leviers-list">
+      <div class="levier-row reveal">
+        <div class="levier-number">01</div>
+        <div>
+          <h3 class="levier-row-title">Les élèves</h3>
+          <p class="levier-row-desc">Des « grandes sœurs » ingénieures viennent en classe. Par leur simple présence, elles montrent qu'une fille peut aimer les sciences et en faire son métier.</p>
+        </div>
+        <div class="levier-detail">
+          <ul>
+            <li>Ateliers pratiques adaptés à chaque niveau (primaire, collège, lycée)</li>
+            <li>Présentation de parcours réels, de l'école à l'emploi</li>
+            <li>Expériences scientifiques concrètes avec du vrai matériel</li>
+            <li>Temps d'échange libre sur les stéréotypes et les doutes</li>
+          </ul>
+        </div>
+      </div>
+      <div class="levier-row reveal">
+        <div class="levier-number">02</div>
+        <div>
+          <h3 class="levier-row-title">Les enseignants</h3>
+          <p class="levier-row-desc">Les biais inconscients se transmettent souvent sans que les enseignants le sachent. Nous les formons pour que chaque cours devienne un espace sans stéréotypes.</p>
+        </div>
+        <div class="levier-detail">
+          <ul>
+            <li>Formation aux biais inconscients de genre en milieu scolaire</li>
+            <li>Outils concrets pour un langage et des exemples inclusifs</li>
+            <li>Suivi et accompagnement post-formation</li>
+          </ul>
+        </div>
+      </div>
+      <div class="levier-row reveal">
+        <div class="levier-number">03</div>
+        <div>
+          <h3 class="levier-row-title">Les contenus pédagogiques</h3>
+          <p class="levier-row-desc">Intégration structurelle dans les classes pas une sensibilisation isolée, mais une transformation reproductible et durable.</p>
+        </div>
+        <div class="levier-detail">
+          <ul>
+            <li>Ressources clés-en-main pour les professeurs de sciences</li>
+            <li>Exemples de femmes ingénieures à intégrer dans les cours</li>
+            <li>Protocoles validés et reproductibles d'une école à l'autre</li>
+            <li>Comptes-rendus d'impact réguliers pour les familles</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOMAINES -->
+<section class="domaines" id="domaines">
+  <div class="container">
+    <div style="text-align: center; max-width: 560px; margin: 0 auto;">
+      <p class="section-eyebrow reveal">Les domaines</p>
+      <h2 class="section-title reveal">L'ingénierie, c'est bien plus que l'informatique</h2>
+      <p class="section-sub reveal">Nous couvrons la richesse et la diversité des métiers d'ingénieur pour élargir les représentations.</p>
+    </div>
+    <div class="domaines-grid">
+      <div class="domaine-card reveal"><div class="domaine-icon">🏗️</div><p class="domaine-name">Génie civil</p><p class="domaine-ex">Ponts, bâtiments, infrastructures urbaines</p></div>
+      <div class="domaine-card reveal reveal-delay-1"><div class="domaine-icon">⚗️</div><p class="domaine-name">Chimie</p><p class="domaine-ex">Matériaux, pharmacie, cosmétique</p></div>
+      <div class="domaine-card reveal reveal-delay-1"><div class="domaine-icon">🌾</div><p class="domaine-name">Agroalimentaire</p><p class="domaine-ex">Alimentation, nutrition, agriculture</p></div>
+      <div class="domaine-card reveal reveal-delay-2"><div class="domaine-icon">⚡</div><p class="domaine-name">Énergie</p><p class="domaine-ex">Renouvelables, nucléaire, réseaux</p></div>
+      <div class="domaine-card reveal reveal-delay-2"><div class="domaine-icon">🌱</div><p class="domaine-name">Environnement</p><p class="domaine-ex">Eau, déchets, transition écologique</p></div>
+      <div class="domaine-card reveal reveal-delay-3"><div class="domaine-icon">🫀</div><p class="domaine-name">Biomédical</p><p class="domaine-ex">Dispositifs médicaux, imagerie, prothèses</p></div>
+      <div class="domaine-card reveal reveal-delay-3"><div class="domaine-icon">✈️</div><p class="domaine-name">Aéronautique</p><p class="domaine-ex">Avions, drones, satellites</p></div>
+      <div class="domaine-card reveal reveal-delay-4"><div class="domaine-icon">💻</div><p class="domaine-name">Informatique</p><p class="domaine-ex">IA, cybersécurité, logiciels</p></div>
+      <div class="domaine-card reveal reveal-delay-4"><div class="domaine-icon">✏️</div><p class="domaine-name">Design</p><p class="domaine-ex">Conception, plan 2D</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLIC CIBLE -->
+<section class="public">
+  <div class="container">
+    <p class="section-eyebrow reveal">Pour qui</p>
+    <h2 class="section-title reveal">De 8 à 17 ans, avant le décrochage</h2>
+    <p class="section-sub reveal" style="max-width: 560px;">Nous intervenons avant que l'autocensure ne soit consommée quand il est encore temps de changer le cours des choses.</p>
+    <div class="ages-row">
+      <div class="age-card reveal">
+        <div class="age-range">8–10 ans</div>
+        <p class="age-level">École primaire</p>
+        <p class="age-desc">Éveil à la curiosité scientifique. Planter la graine avant les premières influences négatives.</p>
+        <div class="age-ateliers">
+          <span>Expériences simples</span>
+          <span>Jeux de rôle</span>
+          <span>Portraits d'ingénieures</span>
+        </div>
+      </div>
+      <div class="age-card reveal reveal-delay-1">
+        <div class="age-range">10–14 ans</div>
+        <p class="age-level">Collège</p>
+        <p class="age-desc">Période clé. Les stéréotypes s'installent vite. Nous intervenons directement dans ce moment charnière.</p>
+        <div class="age-ateliers">
+          <span>Arduino</span>
+          <span>Chimie pratique</span>
+          <span>Échanges métiers</span>
+        </div>
+      </div>
+      <div class="age-card reveal reveal-delay-2">
+        <div class="age-range">14–17 ans</div>
+        <p class="age-level">Lycée</p>
+        <p class="age-desc">Orientation à venir. Montrer concrètement les possibilités et déconstruire les derniers freins.</p>
+        <div class="age-ateliers">
+          <span>Projets techniques</span>
+          <span>Témoignages d'étudiantes</span>
+          <span>Visite d'entreprises</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODELE -->
+<section class="modele" id="modele">
+  <div class="container">
+    <p class="section-eyebrow reveal">Notre modèle</p>
+    <h2 class="section-title reveal">Coûteux pour les établissements</h2>
+    <div class="modele-layout">
+      <div class="financement-list">
+        <div class="financement-item reveal">
+          <div class="financement-dot"></div>
+          <div>
+            <p class="financement-title">Mécénat RSE d'entreprise</p>
+            <p class="financement-desc">Des entreprises engagées pour l'égalité femmes-hommes financent le programme. Elles prêtent aussi leur matériel pédagogique (Arduino, matériel de chimie, électronique...).</p>
+          </div>
+        </div>
+        <div class="financement-item reveal reveal-delay-1">
+          <div class="financement-dot"></div>
+          <div>
+            <p class="financement-title">Intérimaires</p>
+            <p class="financement-desc">Les intervenantes sont des étudiantes ingénieures engagées en service civique. Leurs frais de déplacement sont intégralement pris en charge par le programme.</p>
+          </div>
+        </div>
+        <div class="financement-item reveal reveal-delay-2">
+          <div class="financement-dot"></div>
+          <div>
+            <p class="financement-title">Fondations et subventions publiques</p>
+            <p class="financement-desc">Soutien de fondations privées et de collectivités territoriales pour garantir l'indépendance et la pérennité du programme sur le long terme.</p>
+          </div>
+        </div>
+        <div class="financement-item reveal reveal-delay-3">
+          <div class="financement-dot"></div>
+          <div>
+            <p class="financement-title">Matériel des établissements</p>
+            <p class="financement-desc">Certains établissements partenaires fournissent leur propre matériel scientifique. Nous pouvons adapter le programme à ce qui est disponible.</p>
+          </div>
+        </div>
+      </div>
+      <div class="gratuit-card reveal">
+        <span class="gratuit-badge">Un petit coût</span>
+        <h3 class="gratuit-title">Pour votre établissement</h3>
+        <p class="gratuit-desc"> Après votre payemant. Tout est pris en charge : les intervenantes, leurs déplacements, et prêt de matériel scientifique durant la scéance.</p>
+        <div class="materiel-list">
+          <div class="materiel-item">Cartes Arduino et électronique</div>
+          <div class="materiel-item">Matériel de chimie et de physique</div>
+          <div class="materiel-item">Supports pédagogiques imprimés</div>
+          <div class="materiel-item">Formation des enseignants incluse</div>
+        </div>
+        <a href="contact.html" class="btn-primary" style="width: 100%; text-align: center; display: block;">Accueillir une intervention</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/layout.js"></script>
+<script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const navbar = document.getElementById('navbar');
+    if (navbar) navbar.classList.add('solid');
+  });
+</script>
+</body>
+</html>

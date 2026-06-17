@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'équipe — Les Curieuses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  nav { background: var(--violet); }
+
+  /* EQUIPE FONDATRICE */
+  .fondateurs { background: var(--white); }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px;
+    margin-top: 56px;
+  }
+  .member-card {
+    background: var(--cream);
+    border-radius: 20px;
+    padding: 36px 32px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .member-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(45,27,105,0.1); }
+  .member-avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: var(--violet);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--white);
+    margin-bottom: 20px;
+    position: relative; 
+  }
+  .member-avatar::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid var(--rose);
+  }
+  .member-name { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--violet); margin-bottom: 4px; }
+  .member-role { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--rose-deep); margin-bottom: 16px; }
+  .member-bio { font-size: 0.875rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 20px; }
+  .member-school {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--violet-pale);
+    color: var(--violet);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 100px;
+  }
+  .member-school::before { content: '◎'; font-size: 0.6rem; }
+
+  /* INTERVENANTES */
+  .intervenantes { background: var(--violet); }
+  .intervenantes .section-title { color: var(--white); }
+  .intervenantes .section-eyebrow { color: var(--gold); }
+  .intervenantes .section-sub { color: rgba(255,255,255,0.6); }
+  .interv-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-top: 56px;
+  }
+  .interv-text p { color: rgba(255,255,255,0.65); line-height: 1.85; margin-bottom: 20px; }
+  .interv-steps { display: flex; flex-direction: column; gap: 16px; }
+  .interv-step {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .interv-step-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    line-height: 1;
+    min-width: 32px;
+  }
+  .interv-step-title { font-weight: 600; font-size: 0.9rem; color: var(--white); margin-bottom: 4px; }
+  .interv-step-desc { font-size: 0.825rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
+
+  /* REJOINDRE */
+  .rejoindre { background: var(--cream); }
+  .rejoindre-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 56px;
+  }
+  .rejoindre-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 40px 36px;
+    transition: transform 0.2s;
+  }
+  .rejoindre-card:hover { transform: translateY(-4px); }
+  .rejoindre-icon { font-size: 2rem; margin-bottom: 20px; }
+  .rejoindre-title { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--violet); margin-bottom: 12px; }
+  .rejoindre-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 24px; }
+  .rejoindre-crit { display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
+  .rejoindre-crit-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    font-size: 0.875rem; color: var(--text-muted);
+  }
+  .rejoindre-crit-item::before { content: '✦'; color: var(--rose-deep); font-size: 0.6rem; margin-top: 5px; flex-shrink: 0; }
+
+  @media (max-width: 768px) {
+    .interv-layout { grid-template-columns: 1fr; gap: 40px; }
+    .rejoindre-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<div class="page-header">
+  <p class="page-header-eyebrow">L'équipe</p>
+  <h1>Des ingénieures<br>qui <em>montrent la voie</em></h1>
+  <p class="page-header-sub">L'équipe fondatrice, les étudiant.es ingénieur.es et les ingéneieur.es qui font vivre le programme au quotidien.</p>
+</div>
+
+<!-- FONDATEURS -->
+<section class="fondateurs">
+  <div class="container">
+    <p class="section-eyebrow reveal">L'équipe fondatrice</p>
+    <h2 class="section-title reveal">Celles et ceux qui ont lancé Les Curieuses</h2>
+    <p class="section-sub reveal" style="max-width: 540px;">Des ingénieur.es qui ont vécu les stéréotypes de genre à l'école et ont décidé de changer les choses.</p>
+    <div class="team-grid">
+      <div class="member-card reveal">
+        <div class="member-avatar">MG</div>
+        <h3 class="member-name">Mathéo GUILLEMIN</h3>
+        <p class="member-role">Fondateur & Directeur</p>
+        <p class="member-bio">Ingénieur en formation.</p>
+        <span class="member-school">ESTIA Bidart</span>
+      </div>
+      <div class="member-card reveal reveal-delay-1">
+        <div class="member-avatar">LL</div>
+        <h3 class="member-name">Léo LACAZETTE</h3>
+        <p class="member-role">Co-Fondateur & Co-Directeur</p>
+        <p class="member-bio">Ingénieur en formation.</p>
+        <span class="member-school">ESTIA Bidart</span>
+      </div>
+      <div class="member-card reveal reveal-delay-2">
+        <div class="member-avatar">SM</div>
+        <h3 class="member-name">Soissick M'BILA MATESSA</h3>
+        <p class="member-role">Co-Fondatrice & Trésorière</p>
+        <p class="member-bio">Ingénieure en formation.</p>
+        <span class="member-school">ESTIA Bidart</span>
+      </div>
+      <div class="member-card reveal reveal-delay-3">
+        <div class="member-avatar">EG</div>
+        <h3 class="member-name">Emmanuella GOURE</h3>
+        <p class="member-role">Co-Fondatrice & Co-Responsable des activités</p>
+        <p class="member-bio">Ingénieure en formation.</p>
+        <span class="member-school">ESTIA Bidart</span>
+      </div>
+      <div class="member-card reveal reveal-delay-4">
+        <div class="member-avatar">AG</div>
+        <h3 class="member-name">Aubin GIRAUD</h3>
+        <p class="member-role">Co-Fondateur & Co-Responsable des activités</p>
+        <p class="member-bio">Ingénieur en formation.</p>
+        <span class="member-school">ESTIA Bidart</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERVENANTES -->
+<section class="intervenantes" id="intervenantes">
+  <div class="container">
+    <p class="section-eyebrow reveal">Les marraines et parrains</p>
+    <h2 class="section-title reveal">Les bénévoles ingénieur.es</h2>
+    <div class="interv-layout">
+      <div class="interv-text">
+        <p class="reveal">Ce sont celles et ceux, au cœur du programme. Des étudiant.es en école d'ingénieurs et des ingénieur.es qui choisissent de consacrer une partie de leur année à intervenir dans les classes non pas par obligation, par conviction.</p>
+        <p class="reveal">Leur présence est le message le plus puissant que nous puissions envoyer à une jeune fille de 6 à 16 ans : une ingénieure ou ingénieur, c'est quelqu'un qui lui ressemble, qui a fait les mêmes maths qu'elle, et qui s'épanouit dans son métier.</p>
+        <a href="contact.html#intervenir" class="btn-ghost reveal" style="margin-top: 8px; display: inline-block;">Devenir intervenant.e</a>
+      </div>
+      <div class="interv-steps">
+        <div class="interv-step reveal">
+          <div class="interv-step-num">1</div>
+          <div>
+            <p class="interv-step-title">Candidature & sélection</p>
+            <p class="interv-step-desc">Étudiant.es en école d'ingénieurs ou ingénieur.es. Aucune expérience pédagogique requise juste de l'enthousiasme.</p>
+          </div>
+        </div>
+        <div class="interv-step reveal reveal-delay-1">
+          <div class="interv-step-num">2</div>
+          <div>
+            <p class="interv-step-title">Formation de 2 jours</p>
+            <p class="interv-step-desc">Techniques d'animation, gestion de classe, biais inconscients, présentation des ateliers. Tout pour intervenir avec confiance.</p>
+          </div>
+        </div>
+        <div class="interv-step reveal reveal-delay-2">
+          <div class="interv-step-num">3</div>
+          <div>
+            <p class="interv-step-title">Interventions en binôme</p>
+            <p class="interv-step-desc">Toujours en duo lors des premières interventions. Une expérience enrichissante autant pour les élèves que pour les intervenant.es.</p>
+          </div>
+        </div>
+        <div class="interv-step reveal reveal-delay-3">
+          <div class="interv-step-num">4</div>
+          <div>
+            <p class="interv-step-title">Suivi et communauté</p>
+            <p class="interv-step-desc">Un réseau d'intervenantes actif, des temps de debriefing réguliers et une reconnaissance dans le portfolio universitaire.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REJOINDRE -->
+<section class="rejoindre">
+  <div class="container">
+    <div style="text-align: center; max-width: 560px; margin: 0 auto;">
+      <p class="section-eyebrow reveal">Rejoindre l'aventure</p>
+      <h2 class="section-title reveal">Deux façons de nous rejoindre</h2>
+      <p class="section-sub reveal">Que vous soyez étudiant.e ingénieur.e ou entreprise engagée, il y a une place pour vous.</p>
+    </div>
+    <div class="rejoindre-grid">
+      <div class="rejoindre-card reveal">
+        <div class="rejoindre-icon">✦</div>
+        <h3 class="rejoindre-title">Devenir intervenant.e</h3>
+        <p class="rejoindre-desc">Rejoignez le programme en tant qu'étudiant.e ingénieur.e. C'est une expérience humaine forte et un vrai enrichissement personnel.</p>
+        <div class="rejoindre-crit">
+          <div class="rejoindre-crit-item">Être en école d'ingénieurs ou être ingénieur.e</div>
+          <div class="rejoindre-crit-item">Disponible pour 2 à 5 interventions par mois</div>
+          <div class="rejoindre-crit-item">Envie de transmettre et de s'engager</div>
+        </div>
+        <a href="contact.html#intervenir" class="btn-primary">Je postule</a>
+      </div>
+      <div class="rejoindre-card reveal reveal-delay-1">
+        <div class="rejoindre-icon">◈</div>
+        <h3 class="rejoindre-title">Devenir partenaire</h3>
+        <p class="rejoindre-desc">Soutenez le programme en tant qu'entreprise engagée pour l'égalité. Vous pouvez contribuer financièrement ou en prêtant votre matériel technique.</p>
+        <div class="rejoindre-crit">
+          <div class="rejoindre-crit-item">Mécénat RSE avec reçu fiscal</div>
+          <div class="rejoindre-crit-item">Prêt de matériel pédagogique scientifique</div>
+          <div class="rejoindre-crit-item">Visibilité dans les comptes-rendus d'impact</div>
+        </div>
+        <a href="contact.html#partenaire" class="btn-secondary">Nous contacter</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/layout.js"></script>
+<script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const navbar = document.getElementById('navbar');
+    if (navbar) navbar.classList.add('solid');
+  });
+</script>
+</body>
+</html>

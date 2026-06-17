@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Les Curieuses — Les sciences sont pour toutes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--violet);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 48px 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(242,196,206,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -100px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,197,71,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    color: var(--white);
+    line-height: 1.05;
+    max-width: 800px;
+    margin-bottom: 28px;
+  }
+  .hero h1 em { color: var(--rose); font-style: italic; }
+  .hero-sub {
+    font-size: 1.125rem;
+    color: rgba(255,255,255,0.7);
+    max-width: 540px;
+    margin-bottom: 48px;
+    line-height: 1.8;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.35);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    animation: nudge 2s infinite;
+  }
+  .scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, rgba(255,255,255,0.35), transparent); }
+  @keyframes nudge { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--white);
+    padding: 0 48px;
+  }
+  .stats-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid rgba(45,27,105,0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    transform: translateY(-40px);
+    box-shadow: 0 20px 60px rgba(45,27,105,0.12);
+  }
+  .stat-item {
+    padding: 32px 28px;
+    border-right: 1px solid rgba(45,27,105,0.07);
+    background: var(--white);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.75rem;
+    color: var(--violet);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-num .accent { color: var(--rose-deep); }
+  .stat-label { font-size: 0.875rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* INTRO */
+  .intro { background: var(--white); padding-top: 20px; }
+  .intro-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .intro-text p { color: var(--text-muted); margin-bottom: 20px; line-height: 1.85; }
+  .intro-actions { display: flex; gap: 16px; margin-top: 8px; flex-wrap: wrap; }
+  .intro-visual {
+    background: var(--violet);
+    border-radius: 20px;
+    padding: 48px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .intro-visual::before {
+    content: '"';
+    font-family: 'DM Serif Display', serif;
+    font-size: 11rem;
+    color: rgba(255,255,255,0.05);
+    position: absolute;
+    top: -30px; left: 20px;
+    line-height: 1;
+  }
+  .intro-quote {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.45rem;
+    color: var(--white);
+    line-height: 1.55;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .intro-quote em { color: var(--gold); font-style: italic; }
+  .intro-attr { font-size: 0.8rem; color: rgba(255,255,255,0.4); letter-spacing: 0.04em; }
+
+  /* LEVIERS PREVIEW */
+  .leviers-preview { background: var(--cream); }
+  .leviers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+  .levier-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 36px 32px;
+    border-bottom: 3px solid transparent;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+  .levier-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(45,27,105,0.1); border-bottom-color: var(--rose-deep); }
+  .levier-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: var(--violet-pale);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+  }
+  .levier-title { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--violet); margin-bottom: 12px; }
+  .levier-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; }
+
+  /* POURQUOI MAINTENANT */
+  .urgence { background: var(--violet); padding: 88px 48px; }
+  .urgence .section-title { color: var(--white); }
+  .urgence .section-eyebrow { color: var(--gold); }
+  .urgence-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-top: 56px;
+  }
+  .urgence-text p { color: rgba(255,255,255,0.65); line-height: 1.85; margin-bottom: 24px; }
+  .urgence-cards { display: flex; flex-direction: column; gap: 16px; }
+  .urgence-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 24px 28px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .urgence-badge {
+    background: var(--gold);
+    color: var(--violet);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 100px;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+  .urgence-card-text { font-size: 0.9rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
+
+  /* CTA BANDE */
+  .cta-band {
+    background: var(--gold);
+    padding: 60px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .cta-band-text h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.75rem;
+    color: var(--violet);
+    margin-bottom: 8px;
+  }
+  .cta-band-text p { font-size: 0.9375rem; color: rgba(45,27,105,0.7); }
+  .cta-band .btn-secondary { border-color: var(--violet); }
+
+  @media (max-width: 768px) {
+    .hero { padding: 110px 24px 80px; }
+    .stats-bar { padding: 0 24px; }
+    .stats-inner { grid-template-columns: 1fr 1fr; transform: translateY(-24px); }
+    .stat-item { border-bottom: 1px solid rgba(45,27,105,0.07); }
+    .intro-layout, .urgence-layout { grid-template-columns: 1fr; gap: 40px; }
+    .leviers-grid { grid-template-columns: 1fr; }
+    .cta-band { flex-direction: column; text-align: center; padding: 48px 24px; }
+  }
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- <p class="hero-eyebrow">En hommage à Marie Curie ✦ Double lauréate du Prix Nobel</p> -->
+  <h1>Les sciences sont<br><em>faites pour toutes.</em></h1>
+  <p class="hero-sub">Les Curieuses intervient directement dans les écoles pour montrer aux jeunes filles que les carrières scientifiques leur appartiennent, avant que l'autocensure ne décide à leur place.</p>
+  <div class="hero-actions">
+    <a href="programme.html" class="btn-primary">Découvrir le programme</a>
+    <a href="contact.html" class="btn-ghost">Accueillir une intervention</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Défiler</span>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item reveal">
+      <div class="stat-num"><span class="counter accent" data-target="24">0</span>%</div>
+      <p class="stat-label">des ingénieurs actifs en France sont des femmes</p>
+    </div>
+    <div class="stat-item reveal reveal-delay-1">
+      <div class="stat-num"><span class="counter" data-target="33">0</span>%</div>
+      <p class="stat-label">son étudiantes en école d'ingénieur</p>
+    </div>
+    <div class="stat-item reveal reveal-delay-2">
+      <div class="stat-num"><span class="counter" data-target="82">0</span>%</div>
+      <p class="stat-label">ont subi des stéréotypes de genre pendant leur scolarité</p>
+    </div>
+    <div class="stat-item reveal reveal-delay-3">
+      <div class="stat-num"><span class="counter" data-target="6">0</span> ans</div>
+      <p class="stat-label">L'autocensure commence dès 6 ans</p>
+    </div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="container">
+    <div class="intro-layout">
+      <div class="intro-text">
+        <p class="section-eyebrow reveal">Notre réponse</p>
+        <h2 class="section-title reveal">Un programme qui change le cours des choses</h2>
+        <p class="reveal">Des étudiant.es ingénieur.es interviennent directement dans les classes, du primaire au lycée. Par leur présence, elles et ils montrent qu'une fille peut aimer les sciences et en faire son métier.</p>
+        <p class="reveal">Notre approche agit simultanément sur les élèves, les enseignants et les contenus pédagogiques pour une transformation structurelle, pas une sensibilisation ponctuelle.</p>
+        <div class="intro-actions reveal">
+          <a href="programme.html" class="btn-primary">Le programme complet</a>
+          <a href="impact.html" class="btn-secondary">Notre impact</a>
+        </div>
+      </div>
+      <div class="intro-visual reveal">
+        <p class="intro-quote">Une fille qui se dit <em> les sciences, c'est pour moi </em> à 10 ans, c'est une ingénieure de plus dans 15 ans.</p>
+        <p class="intro-attr"> Peut-être la prochaine Marie Curie.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEVIERS -->
+<section class="leviers-preview">
+  <div class="container">
+    <div style="text-align: center; max-width: 560px; margin: 0 auto;">
+      <p class="section-eyebrow reveal">3 leviers simultanés</p>
+      <h2 class="section-title reveal">Ce qui nous rend différentes</h2>
+      <p class="section-sub reveal">La plupart des initiatives restent ponctuelles. Nous intégrons le changement dans le système lui-même.</p>
+    </div>
+    <div class="leviers-grid">
+      <div class="levier-card reveal">
+        <div class="levier-icon">✦</div>
+        <h3 class="levier-title">Les élèves</h3>
+        <p class="levier-desc">Ateliers concrets, rencontres avec des ingénieures et étudiants, déconstruction des stéréotypes en temps réel adaptés à chaque niveau scolaire.</p>
+      </div>
+      <div class="levier-card reveal reveal-delay-1">
+        <div class="levier-icon">◈</div>
+        <h3 class="levier-title">Les enseignants</h3>
+        <p class="levier-desc">Formation aux biais inconscients pour que la classe entière devienne un espace sans stéréotypes bien après chaque intervention.</p>
+      </div>
+      <div class="levier-card reveal reveal-delay-2">
+        <div class="levier-icon">◎</div>
+        <h3 class="levier-title">Les contenus</h3>
+        <p class="levier-desc">Intégration structurelle dans les classes pas une sensibilisation isolée, mais une transformation reproductible et durable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- URGENCE -->
+<section class="urgence">
+  <div class="container">
+    <p class="section-eyebrow reveal">Pourquoi maintenant</p>
+    <h2 class="section-title reveal" style="max-width: 600px;">Chaque année sans action, c'est une génération de plus.</h2>
+    <div class="urgence-layout">
+      <div class="urgence-text">
+        <p class="reveal">La part des femmes dans les filières d'ingénierie en France a reculé entre 2015 et 2021, alors que la moyenne européenne restait stable.</p>
+        <p class="reveal">Chaque année sans action, c'est une nouvelle génération de filles qui intériorise que les sciences ne leur appartiennent pas. Et une fois qu'elles ont quitté ces filières, il est statistiquement très rare qu'elles y reviennent.</p>
+        <a href="impact.html" class="btn-ghost reveal" style="margin-top: 8px;">Voir tous nos chiffres</a>
+      </div>
+      <div class="urgence-cards">
+        <div class="urgence-card reveal">
+          <span class="urgence-badge">2015–2021</span>
+          <p class="urgence-card-text">La France recule en matière de femmes ingénieures, à contre-courant de l'Europe.</p>
+        </div>
+        <div class="urgence-card reveal reveal-delay-1">
+          <span class="urgence-badge">Dès 6 ans</span>
+          <p class="urgence-card-text">Le phénomène d'autocensure commence en primaire et s'amplifie à l'adolescence.</p>
+        </div>
+        <div class="urgence-card reveal reveal-delay-2">
+          <span class="urgence-badge">67 000 €</span>
+          <p class="urgence-card-text">Salaire médian d'un·e ingénieur·e.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div class="cta-band-text">
+    <h2>Prêt·e à accueillir Les Curieuses dans votre école ?</h2>
+    <p>Le programme est entièrement gratuit pour les établissements partenaires.</p>
+  </div>
+  <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+    <a href="contact.html" class="btn-primary">Nous contacter</a>
+    <a href="programme.html" class="btn-secondary">En savoir plus</a>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="js/layout.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
