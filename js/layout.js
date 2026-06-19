@@ -18,7 +18,7 @@ const FOOTER_HTML = `
 <footer>
   <div class="footer-top">
     <div>
-      <div class="footer-logo">Les Curieuses <span></span></div>
+      <div class="footer-logo">Les Curieuses </div>
     </div>
     <div class="footer-col">
       <h4>Programme</h4>
