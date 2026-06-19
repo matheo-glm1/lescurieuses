@@ -1,59 +1,62 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Faire un don — Les Curieuses</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faire un don — Les Curieuses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/don.css">
 </head>
 <body>
 <div id="nav-placeholder"></div>
-
-  <!-- HERO -->
-  <section class="hero">
-    <span class="eyebrow">Nous soutenir</span>
-    <h1>Chaque don finance<br><em>une curiosité de plus.</em></h1>
-    <p>Les Curieuses intervient gratuitement dans les écoles. C'est possible grâce aux dons de particuliers qui croient que les sciences appartiennent à toutes.</p>
-  </section>
-
-  <!-- IMPACT STRIP -->
-  <div class="impact-strip">
-    <div class="impact-item">
-      <span class="impact-num">12 €</span>
-      <span class="impact-label">finance l'intervention d'une ingénieure pendant une heure dans une classe</span>
-    </div>
-    <div class="impact-item">
-      <span class="impact-num">50 €</span>
-      <span class="impact-label">couvre les déplacements d'une intervenante pour une journée complète</span>
-    </div>
-    <div class="impact-item">
-      <span class="impact-num">200 €</span>
-      <span class="impact-label">finance une formation complète de professeurs aux biais inconscients</span>
+ 
+<div class="page-header">
+  <p class="page-header-eyebrow">Nous soutenir</p>
+  <h1>Chaque don finance<br><em>une curiosité de plus</em></h1>
+  <p class="page-header-sub">Les Curieuses intervient gratuitement dans les écoles. C'est possible grâce aux dons de particuliers qui croient que les sciences appartiennent à toutes.</p>
+</div>
+ 
+<!-- IMPACT STRIP -->
+<section class="impact-strip-section">
+  <div class="container">
+    <div class="impact-strip">
+      <div class="impact-item reveal">
+        <span class="impact-num">12 €</span>
+        <span class="impact-label">finance l'intervention d'une ingénieure pendant une heure dans une classe</span>
+      </div>
+      <div class="impact-item reveal reveal-delay-1">
+        <span class="impact-num">50 €</span>
+        <span class="impact-label">couvre les déplacements d'une intervenante pour une journée complète</span>
+      </div>
+      <div class="impact-item reveal reveal-delay-2">
+        <span class="impact-num">200 €</span>
+        <span class="impact-label">finance une formation complète de professeurs aux biais inconscients</span>
+      </div>
     </div>
   </div>
-
-  <!-- DONATION WIDGET -->
-  <div class="section">
-    <div class="section-header">
-      <h2>Choisissez votre <em>contribution</em></h2>
-      <p>100 % de votre don est déductible à 66 % de votre impôt sur le revenu.</p>
-    </div>
-
+</section>
+ 
+<!-- DONATION WIDGET -->
+<section class="don-section">
+  <div class="container">
+    <p class="section-eyebrow reveal">Faire un don</p>
+    <h2 class="section-title reveal">Choisissez votre <em>contribution</em></h2>
+    <p class="section-sub reveal" style="max-width: 540px;">100 % de votre don est déductible à 66 % de votre impôt sur le revenu.</p>
+ 
     <div class="don-wrapper">
-
+ 
       <!-- LEFT: FORM -->
-      <div class="don-left">
+      <div class="don-left card reveal">
         <span class="amount-label">Fréquence</span>
         <div class="freq-toggle">
           <button class="freq-btn active" onclick="setFreq(this, 'mois')">Mensuel</button>
           <button class="freq-btn" onclick="setFreq(this, 'an')">Annuel</button>
           <button class="freq-btn" onclick="setFreq(this, 'unique')">Unique</button>
         </div>
-
+ 
         <span class="amount-label">Montant</span>
         <div class="amount-grid">
           <button class="amount-btn" onclick="selectAmount(this, 10)">
@@ -81,17 +84,17 @@
             <small>par mois</small>
           </button>
         </div>
-
+ 
         <div class="custom-amount">
           <span>€</span>
           <input type="number" id="customInput" placeholder="Autre montant" min="1"
             oninput="setCustomAmount(this.value)" />
         </div>
-
-        <button class="btn-primary" onclick="submitDon()">
+ 
+        <button class="btn-primary don-submit" onclick="submitDon()">
           Faire un don de <span id="btnAmount">25 €</span> / mois
         </button>
-
+ 
         <p class="secure-note">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
@@ -99,13 +102,13 @@
           Paiement sécurisé — Vous recevrez un reçu fiscal par email
         </p>
       </div>
-
+ 
       <!-- RIGHT: IMPACT PREVIEW -->
-      <div class="don-right">
+      <div class="don-right card reveal reveal-delay-1">
         <p class="impact-preview-title">Ce que votre don permet</p>
         <div class="impact-preview-amount" id="previewAmount">25 €</div>
         <p class="impact-preview-freq" id="previewFreq">par mois</p>
-
+ 
         <div class="impact-items" id="impactItems">
           <div class="impact-row unlocked">
             <div class="impact-icon">👩‍🔬</div>
@@ -141,133 +144,152 @@
       </div>
     </div>
   </div>
-
-  <!-- FISCAL -->
-  <div class="fiscal-section">
-    <div class="fiscal-inner">
-      <div>
-        <h2>Un don <em>déductible</em> à 66 %</h2>
-        <p>Les Curieuses est éligible au dispositif de réduction d'impôt sur le revenu pour les dons aux associations reconnues d'intérêt général (article 200 du CGI).</p>
-        <p>Vous recevez automatiquement un reçu fiscal par email à utiliser lors de votre déclaration de revenus.</p>
-      </div>
-      <div>
-        <div class="fiscal-example">
-          <div class="fiscal-row">
-            <span class="label">Votre don mensuel</span>
-            <span class="value">25 €</span>
-          </div>
-          <div class="fiscal-row">
-            <span class="label">Votre don annuel</span>
-            <span class="value">300 €</span>
-          </div>
-          <div class="fiscal-row">
-            <span class="label">Réduction d'impôt (66 %)</span>
-            <span class="value">198 €</span>
-          </div>
-          <div class="fiscal-row highlight">
-            <span class="label">Coût réel pour vous</span>
-            <span class="value">102 € / an</span>
-          </div>
+</section>
+ 
+<!-- FISCAL -->
+<section class="fiscal-section">
+  <div class="container fiscal-inner">
+    <div class="reveal">
+      <p class="section-eyebrow">Avantage fiscal</p>
+      <h2 class="section-title">Un don <em>déductible</em> à 66 %</h2>
+      <p class="section-sub">Les Curieuses est éligible au dispositif de réduction d'impôt sur le revenu pour les dons aux associations reconnues d'intérêt général (article 200 du CGI).</p>
+      <p class="section-sub" style="margin-top: 12px;">Vous recevez automatiquement un reçu fiscal par email à utiliser lors de votre déclaration de revenus.</p>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div class="fiscal-example card">
+        <div class="fiscal-row">
+          <span class="label">Votre don mensuel</span>
+          <span class="value">25 €</span>
+        </div>
+        <div class="fiscal-row">
+          <span class="label">Votre don annuel</span>
+          <span class="value">300 €</span>
+        </div>
+        <div class="fiscal-row">
+          <span class="label">Réduction d'impôt (66 %)</span>
+          <span class="value">198 €</span>
+        </div>
+        <div class="fiscal-row highlight">
+          <span class="label">Coût réel pour vous</span>
+          <span class="value">102 € / an</span>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- QUOTE -->
-  <div class="quote-section">
-    <blockquote>
+</section>
+ 
+<!-- QUOTE -->
+<section class="quote-section">
+  <div class="container">
+    <blockquote class="reveal">
       « Une fille qui se dit <em>les sciences, c'est pour moi</em> à 10 ans,<br>c'est une ingénieure de plus dans 15 ans. »
     </blockquote>
-    <p class="quote-author">Les Curieuses — depuis 2023</p>
+    <p class="quote-author reveal reveal-delay-1">Les Curieuses — depuis 2023</p>
   </div>
-
-  <!-- OTHER WAYS -->
-  <div class="other-section">
-    <div class="other-inner">
-      <h2>D'autres façons de nous soutenir</h2>
-      <div class="other-grid">
-        <div class="other-card">
-          <div class="other-card-icon">◈</div>
-          <h3>Mécénat d'entreprise</h3>
-          <p>Financez le programme dans le cadre de votre politique RSE avec un reçu fiscal et un rapport d'impact dédié.</p>
-          <a href="contact.html" class="btn-ghost">En savoir plus →</a>
-        </div>
-        <div class="other-card">
-          <div class="other-card-icon">✦</div>
-          <h3>Devenir intervenante</h3>
-          <p>Vous êtes étudiante ingénieure ? Rejoignez Les Curieuses en service civique et transmettez votre passion.</p>
-          <a href="contact.html" class="btn-ghost">Rejoindre →</a>
-        </div>
-        <div class="other-card">
-          <div class="other-card-icon">◎</div>
-          <h3>Accueillir une intervention</h3>
-          <p>Vous êtes un établissement scolaire ? Le programme est disponible du primaire au lycée.</p>
-          <a href="contact.html" class="btn-ghost">Nous contacter →</a>
-        </div>
+</section>
+ 
+<!-- OTHER WAYS -->
+<section class="other-section">
+  <div class="container">
+    <p class="section-eyebrow reveal">Autres façons d'aider</p>
+    <h2 class="section-title reveal">D'autres façons de nous soutenir</h2>
+    <div class="other-grid">
+      <div class="other-card card reveal">
+        <div class="other-card-icon">◈</div>
+        <h3>Mécénat d'entreprise</h3>
+        <p>Financez le programme dans le cadre de votre politique RSE avec un reçu fiscal et un rapport d'impact dédié.</p>
+        <a href="contact.html#partenaire" class="btn-ghost btn-ghost-dark">En savoir plus →</a>
+      </div>
+      <div class="other-card card reveal reveal-delay-1">
+        <div class="other-card-icon">✦</div>
+        <h3>Devenir intervenante</h3>
+        <p>Vous êtes étudiante ingénieure ? Rejoignez Les Curieuses et transmettez votre passion sur le terrain.</p>
+        <a href="contact.html#intervenir" class="btn-ghost btn-ghost-dark">Rejoindre →</a>
+      </div>
+      <div class="other-card card reveal reveal-delay-2">
+        <div class="other-card-icon">◎</div>
+        <h3>Accueillir une intervention</h3>
+        <p>Vous êtes un établissement scolaire ? Le programme est disponible du primaire au lycée.</p>
+        <a href="contact.html" class="btn-ghost btn-ghost-dark">Nous contacter →</a>
       </div>
     </div>
   </div>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2024 Les Curieuses — Association loi 1901</p>
-    <div style="display:flex;gap:2rem;">
-      <a href="#">Mentions légales</a>
-      <a href="#">Politique de confidentialité</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </footer>
+</section>
+ 
 <div id="footer-placeholder"></div>
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+<script src="js/layout.js"></script>
+<script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const navbar = document.getElementById('navbar');
+    if (navbar) navbar.classList.add('solid');
+ 
+    const freqLabels = { mois: 'par mois', an: 'par an', unique: 'don unique' };
+    let currentFreq = 'mois';
+    let currentAmount = 25;
+ 
+    window.setFreq = function (btn, freq) {
+      currentFreq = freq;
+      document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.amount-btn small').forEach(s => {
+        s.textContent = freqLabels[freq];
       });
-    });
-
-    // Forms
-    ['etablissement', 'partenaire', 'intervenir'].forEach(id => {
-      const form = document.getElementById('form-' + id);
-      const success = document.getElementById('success-' + id);
-      if (form) {
-        form.addEventListener('submit', (e) => {
-          e.preventDefault();
-          form.style.display = 'none';
-          success.style.display = 'block';
-        });
+      updateUI();
+    };
+ 
+    window.selectAmount = function (btn, amount) {
+      currentAmount = amount;
+      document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      const customInput = document.getElementById('customInput');
+      if (customInput) customInput.value = '';
+      updateUI();
+    };
+ 
+    window.setCustomAmount = function (value) {
+      const amount = parseInt(value, 10);
+      if (!isNaN(amount) && amount > 0) {
+        currentAmount = amount;
+        document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+        updateUI();
       }
-    });
-
-    // FAQ accordion
-    document.querySelectorAll('.faq-q').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const item = btn.parentElement;
-        const answer = item.querySelector('.faq-a');
-        const isOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item').forEach(i => {
-          i.classList.remove('open');
-          i.querySelector('.faq-a').style.maxHeight = null;
-        });
-        if (!isOpen) {
-          item.classList.add('open');
-          answer.style.maxHeight = answer.scrollHeight + 'px';
+    };
+ 
+    window.submitDon = function () {
+      alert(`Merci pour votre générosité ! Don de ${currentAmount} € (${freqLabels[currentFreq]}) en cours de traitement.`);
+    };
+ 
+    function updateUI() {
+      const formatted = `${currentAmount} €`;
+      const btnAmount = document.getElementById('btnAmount');
+      const previewAmount = document.getElementById('previewAmount');
+      const previewFreq = document.getElementById('previewFreq');
+      if (btnAmount) btnAmount.textContent = formatted;
+      if (previewAmount) previewAmount.textContent = formatted;
+      if (previewFreq) previewFreq.textContent = freqLabels[currentFreq];
+ 
+      document.querySelectorAll('.impact-row').forEach(row => {
+        row.classList.remove('unlocked', 'locked');
+      });
+      const rows = document.querySelectorAll('#impactItems .impact-row');
+      const thresholds = [0, 0, 50, 200];
+      rows.forEach((row, i) => {
+        const unlocked = currentAmount >= thresholds[i];
+        row.classList.add(unlocked ? 'unlocked' : 'locked');
+        const badge = row.querySelector('.unlock-badge');
+        if (unlocked && !badge) {
+          const span = document.createElement('span');
+          span.className = 'unlock-badge';
+          span.textContent = '✓';
+          row.appendChild(span);
+        } else if (!unlocked && badge) {
+          badge.remove();
         }
       });
-    });
-
-    // Handle hash navigation (e.g. contact.html#partenaire)
-    const hash = window.location.hash.replace('#', '');
-    if (hash === 'partenaire' || hash === 'intervenir') {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      const btn = document.querySelector(`[data-tab="${hash}"]`);
-      if (btn) {
-        btn.classList.add('active');
-        document.getElementById('tab-' + hash).classList.add('active');
-      }
     }
+ 
+    updateUI();
   });
 </script>
 </body>
