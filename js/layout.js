@@ -18,7 +18,7 @@ const FOOTER_HTML = `
 <footer>
   <div class="footer-top">
     <div>
-      <div class="footer-logo">Les Curieuses <span>✦</span></div>
+      <div class="footer-logo">Les Curieuses <span></span></div>
     </div>
     <div class="footer-col">
       <h4>Programme</h4>
@@ -49,7 +49,7 @@ const FOOTER_HTML = `
     </div>
   </div>
   <div class="footer-bottom">
-    <p class="footer-copy">© 2025 Les Curieuses. Tous droits réservés.</p>
+    <p class="footer-copy">© 2026 Les Curieuses. Tous droits réservés.</p>
     <div class="footer-legal">
       <a href="#">Mentions légales</a>
       <a href="#">Politique de confidentialité</a>
