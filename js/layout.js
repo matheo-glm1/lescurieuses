@@ -8,6 +8,8 @@ const NAV_HTML = `
     <li><a href="equipe.html">L'équipe</a></li>
     <li><a href="impact.html">Notre impact</a></li>
     <li><a href="contact.html" class="nav-cta">Nous rejoindre</a></li>
+    <li><a href="don.html">Faire un don</a></li>
+    <li><a href="partenaire.html">Partenaire</a></li>
   </ul>
   <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
     <span></span><span></span><span></span>
