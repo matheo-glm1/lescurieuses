@@ -6,22 +6,12 @@
   <title>Faire un don — Les Curieuses</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/don.css">
 </head>
 <body>
-
-  <!-- NAV -->
-  <nav>
-    <a href="index.html" class="nav-logo">Les Curieuses</a>
-    <ul class="nav-links">
-      <li><a href="programme.html">Programme</a></li>
-      <li><a href="impact.html">Impact</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="don.html" class="nav-cta active">Faire un don</a></li>
-    </ul>
-  </nav>
+<div id="nav-placeholder"></div>
 
   <!-- HERO -->
   <section class="hero">
@@ -228,15 +218,6 @@
     </div>
   </footer>
 <div id="footer-placeholder"></div>
-<script src="js/layout.js"></script>
-<script src="js/main.js"></script>
-<script src="don.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const navbar = document.getElementById('navbar');
-    if (navbar) navbar.classList.add('solid');
-
-    // Tabs
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
