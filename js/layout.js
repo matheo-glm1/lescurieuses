@@ -8,7 +8,7 @@ const NAV_HTML = `
     <li><a href="equipe.html">L'équipe</a></li>
     <li><a href="impact.html">Notre impact</a></li>
     <li><a href="travaux.html">Partenaire</a></li>
-    <li><a href="don.html">Faire un don</a></li>
+    <li><a href="travaux.html">Faire un don</a></li>
     <li><a href="contact.html" class="nav-cta">Nous rejoindre</a></li>
   
   </ul>
