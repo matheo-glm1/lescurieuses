@@ -272,17 +272,39 @@ footer {
 
 /* ---- MOBILE ---- */
 @media (max-width: 768px) {
-  nav { padding: 16px 24px; }
-  nav.scrolled, nav.solid { padding: 12px 24px; }
-  .nav-links { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--violet); flex-direction: column; justify-content: center; align-items: center; gap: 8px; }
+  body { min-width: 0; }
+  nav { padding: 14px 18px; }
+  nav.scrolled, nav.solid { padding: 10px 18px; }
+  .nav-logo { font-size: 1.1rem; }
+  .nav-links { display: none; position: fixed; inset: 0; background: var(--violet); flex-direction: column; justify-content: center; align-items: center; gap: 12px; padding: 0 24px; }
   .nav-links.open { display: flex; }
-  .nav-links a { font-size: 1.25rem; color: rgba(255,255,255,0.8) !important; padding: 12px 24px; }
-  .nav-links a:hover { color: var(--white) !important; background: rgba(255,255,255,0.08) !important; }
+  .nav-links a { font-size: 1.15rem; color: rgba(255,255,255,0.9) !important; padding: 12px 22px; }
+  .nav-links a:hover { color: var(--white) !important; background: rgba(255,255,255,0.12) !important; }
   .burger { display: flex; z-index: 10; }
-  .page-header { padding: 110px 24px 60px; }
-  section { padding: 60px 24px; }
-  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
-  .footer-bottom { flex-direction: column; text-align: center; }
+  .page-header { padding: 100px 20px 50px; }
+  .page-header-sub { max-width: 100%; }
+  section { padding: 56px 20px; }
+  .container { padding: 0 12px; }
+  .card { padding: 24px 20px; }
+  .btn-primary,
+  .btn-secondary,
+  .btn-ghost { width: 100%; justify-content: center; }
+  .footer-top { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; text-align: center; gap: 12px; }
+  .footer-legal { justify-content: center; flex-wrap: wrap; gap: 12px; }
+}
+
+@media (max-width: 480px) {
+  nav { padding: 14px 16px; }
+  nav.scrolled, nav.solid { padding: 10px 16px; }
+  .page-header { padding: 84px 16px 44px; }
+  section { padding: 46px 16px; }
+  .container { padding: 0 10px; }
+  .section-title { font-size: clamp(1.5rem, 5vw, 2.2rem); }
+  .section-sub, .page-header-sub { max-width: 100%; }
+  .btn-primary,
+  .btn-secondary,
+  .btn-ghost { padding: 14px 18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -159,9 +159,25 @@
   }
 
   @media (max-width: 768px) {
-    .levier-row { grid-template-columns: 1fr; gap: 16px; }
-    .levier-number { font-size: 2.5rem; }
-    .modele-layout { grid-template-columns: 1fr; }
-    .gratuit-card { position: static; }
+    .levier-row { grid-template-columns: 1fr; gap: 18px; padding: 40px 0; }
+    .levier-number { font-size: 2.4rem; }
+    .levier-row-title { font-size: 1.4rem; }
+    .levier-row-desc { font-size: 0.95rem; }
+    .levier-detail { padding-top: 12px; }
+    .domaine-card { padding: 22px 18px; }
+    .modele-layout { grid-template-columns: 1fr; gap: 32px; }
+    .financement-item { flex-direction: column; gap: 14px; }
+    .gratuit-card { position: static; padding: 38px 30px; }
     .ages-row { grid-template-columns: 1fr; }
+    .age-card { padding: 32px 24px; }
+    .age-range { font-size: 1.8rem; }
+  }
+  @media (max-width: 480px) {
+    .levier-row { padding: 30px 0; }
+    .domaine-card { padding: 18px 16px; }
+    .modele-layout { gap: 24px; }
+    .gratuit-card { padding: 32px 22px; }
+    .age-card { padding: 26px 20px; }
+    .age-range { font-size: 1.5rem; }
+    .domaines-grid { grid-template-columns: 1fr; }
   }

@@ -149,8 +149,27 @@ nav { background: var(--violet); }
 
   @media (max-width: 768px) {
     .chiffres-grid { grid-template-columns: 1fr; }
-    .timeline-layout { grid-template-columns: 1fr; }
+    .chiffre-cell { padding: 32px 26px; }
+    .timeline-layout { grid-template-columns: 1fr; gap: 40px; }
     .timeline-nav { position: static; }
-    .timeline-step { grid-template-columns: 1fr; }
+    .timeline-nav-item { padding: 12px 16px; }
+    .timeline-step { grid-template-columns: 1fr; padding: 30px 26px; gap: 22px; }
+    .step-title { font-size: 1.2rem; }
+    .step-desc { font-size: 0.9rem; }
+    .temo-grid { gap: 20px; }
+    .temo-card { padding: 28px 24px; }
     .objectif-layout { grid-template-columns: 1fr; gap: 40px; }
+    .salaire-compare { padding: 28px; }
+  }
+
+  @media (max-width: 480px) {
+    .chiffre-cell { padding: 24px 20px; }
+    .chiffre-num { font-size: 3.2rem; }
+    .timeline-nav-item { padding-left: 18px; }
+    .timeline-step { padding: 24px 20px; gap: 18px; }
+    .step-horizon { padding: 10px; }
+    .temo-card { padding: 24px 20px; }
+    .temo-text { font-size: 1.05rem; }
+    .salaire-compare { padding: 24px; }
+    .salaire-label { flex-direction: column; align-items: flex-start; gap: 6px; }
   }

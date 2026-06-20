@@ -106,6 +106,23 @@
   .rejoindre-crit-item::before { content: '✦'; color: var(--rose-deep); font-size: 0.6rem; margin-top: 5px; flex-shrink: 0; }
 
   @media (max-width: 768px) {
+    .team-grid { gap: 20px; }
+    .member-card { padding: 28px 24px; }
+    .member-avatar { width: 64px; height: 64px; font-size: 1.25rem; }
+    .member-name { font-size: 1.1rem; }
     .interv-layout { grid-template-columns: 1fr; gap: 40px; }
+    .interv-step { padding: 18px 20px; gap: 14px; }
     .rejoindre-grid { grid-template-columns: 1fr; }
+    .rejoindre-card { padding: 32px 28px; }
+    .rejoindre-title { font-size: 1.35rem; }
+  }
+
+  @media (max-width: 480px) {
+    .member-card { padding: 24px 20px; }
+    .member-avatar { width: 56px; height: 56px; }
+    .member-name { font-size: 1rem; }
+    .member-role { font-size: 0.75rem; }
+    .rejoindre-card { padding: 28px 22px; }
+    .interv-step { padding: 16px 18px; }
+    .rejoindre-desc { font-size: 0.86rem; }
   }
