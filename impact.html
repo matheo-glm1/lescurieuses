@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notre impact — Les Curieuses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  nav { background: var(--violet); }
+
+  /* STATS GRID */
+  .chiffres { background: var(--white); }
+  .chiffres-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: #e8e3f0;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 56px;
+  }
+  .chiffre-cell {
+    background: var(--cream);
+    padding: 48px 40px;
+  }
+  .chiffre-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 4rem;
+    color: var(--violet);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .chiffre-num .accent { color: var(--rose-deep); }
+  .chiffre-label { font-size: 0.9375rem; color: var(--text); line-height: 1.6; margin-bottom: 8px; }
+  .chiffre-source { font-size: 0.75rem; color: var(--text-muted); }
+
+  /* TIMELINE D'IMPACT */
+  .timeline-section { background: var(--cream); }
+  .timeline-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+    margin-top: 56px;
+  }
+  .timeline-nav { position: sticky; top: 100px; }
+  .timeline-nav-item {
+    display: block;
+    padding: 14px 20px;
+    border-left: 2px solid rgba(45,27,105,0.12);
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, padding 0.2s;
+    margin-bottom: 4px;
+  }
+  .timeline-nav-item:hover, .timeline-nav-item.active {
+    border-left-color: var(--rose-deep);
+    color: var(--violet);
+    padding-left: 28px;
+  }
+  .timeline-steps { display: flex; flex-direction: column; gap: 32px; }
+  .timeline-step {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 36px 36px;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .step-horizon {
+    background: var(--violet-pale);
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+  }
+  .step-horizon-label { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--rose-deep); display: block; margin-bottom: 4px; }
+  .step-horizon-value { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--violet); line-height: 1.2; }
+  .step-title { font-family: 'DM Serif Display', serif; font-size: 1.35rem; color: var(--violet); margin-bottom: 12px; }
+  .step-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; }
+  .step-metric {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--violet-pale);
+    border-radius: 8px;
+    padding: 8px 14px;
+    margin-top: 16px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--violet);
+  }
+  .step-metric::before { content: '◎'; color: var(--rose-deep); font-size: 0.65rem; }
+
+  /* TEMOIGNAGES */
+  .temoignages { background: var(--violet); }
+  .temoignages .section-title { color: var(--white); }
+  .temoignages .section-eyebrow { color: var(--gold); }
+  .temo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 56px;
+  }
+  .temo-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 36px 32px;
+    transition: background 0.2s;
+  }
+  .temo-card:hover { background: rgba(255,255,255,0.12); }
+  .temo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    color: var(--white);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .temo-text em { color: var(--gold); font-style: italic; }
+  .temo-author { display: flex; align-items: center; gap: 12px; }
+  .temo-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--rose);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    color: var(--violet);
+    font-weight: 700;
+  }
+  .temo-name { font-size: 0.875rem; font-weight: 600; color: var(--white); margin-bottom: 2px; }
+  .temo-role { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+
+  /* OBJECTIF LONG TERME */
+  .objectif { background: var(--white); }
+  .objectif-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .objectif p { color: var(--text-muted); line-height: 1.85; margin-bottom: 20px; }
+  .salaire-compare {
+    background: var(--cream);
+    border-radius: 16px;
+    padding: 36px;
+    margin-top: 24px;
+  }
+  .salaire-row { margin-bottom: 20px; }
+  .salaire-label { font-size: 0.8125rem; font-weight: 500; color: var(--text-muted); margin-bottom: 8px; display: flex; justify-content: space-between; }
+  .salaire-bar-bg { background: rgba(45,27,105,0.08); border-radius: 4px; height: 8px; overflow: hidden; }
+  .salaire-bar { height: 100%; border-radius: 4px; background: var(--violet); transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1); width: 0; }
+  .salaire-bar.rose { background: var(--rose-deep); }
+
+  @media (max-width: 768px) {
+    .chiffres-grid { grid-template-columns: 1fr; }
+    .timeline-layout { grid-template-columns: 1fr; }
+    .timeline-nav { position: static; }
+    .timeline-step { grid-template-columns: 1fr; }
+    .objectif-layout { grid-template-columns: 1fr; gap: 40px; }
+  }
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<div class="page-header">
+  <p class="page-header-eyebrow">Notre impact</p>
+  <h1>Mesurer pour <em>transformer</em></h1>
+  <p class="page-header-sub">Nous suivons l'impact à court, moyen et long terme parce qu'un changement structurel se prouve par les données.</p>
+</div>
+
+<!-- CHIFFRES -->
+<section class="chiffres" id="chiffres">
+  <div class="container">
+    <p class="section-eyebrow reveal">Le constat</p>
+    <h2 class="section-title reveal">Des chiffres qui nous révoltent</h2>
+    <div class="chiffres-grid">
+      <div class="chiffre-cell reveal">
+        <div class="chiffre-num"><span class="counter accent" data-target="23">0</span>%</div>
+        <p class="chiffre-label">des ingénieurs en activité en France sont des femmes un chiffre en recul depuis 2015.</p>
+        <p class="chiffre-source">Données sectorielles 2023</p>
+      </div>
+      <div class="chiffre-cell reveal reveal-delay-1">
+        <div class="chiffre-num"><span class="counter" data-target="88">0</span>%</div>
+        <p class="chiffre-label">des femmes ingénieures déclaraient que les maths faisaient partie de leurs matières préférées à l'école.</p>
+        <p class="chiffre-source">Elles Bougent / OpinionWay 2024</p>
+      </div>
+      <div class="chiffre-cell reveal reveal-delay-2">
+        <div class="chiffre-num"><span class="counter" data-target="82">0</span>%</div>
+        <p class="chiffre-label">d'entre elles ont été confrontées à des stéréotypes de genre durant leur scolarité.</p>
+        <p class="chiffre-source">Elles Bougent / OpinionWay 2024</p>
+      </div>
+      <div class="chiffre-cell reveal">
+        <div class="chiffre-num"><span class="counter" data-target="6">0</span> ans</div>
+        <p class="chiffre-label">L'autocensure scientifique commence dès 6 ans, bien avant les choix d'orientation.</p>
+        <p class="chiffre-source">Psychologie de l'éducation</p>
+      </div>
+      <div class="chiffre-cell reveal reveal-delay-1">
+        <div class="chiffre-num accent">↘</div>
+        <p class="chiffre-label">La part des femmes en ingénierie en France a reculé entre 2015 et 2021, à contre-courant de l'Europe.</p>
+        <p class="chiffre-source">Comparatif européen</p>
+      </div>
+      <div class="chiffre-cell reveal reveal-delay-2">
+        <div class="chiffre-num"><span class="counter" data-target="67">0</span>k€</div>
+        <p class="chiffre-label">Salaire médian annuel d'un·e ingénieur·e les inégalités d'accès sont aussi des inégalités économiques.</p>
+        <p class="chiffre-source">Données APEC 2024</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div class="container">
+    <p class="section-eyebrow reveal">Mesure de l'impact</p>
+    <h2 class="section-title reveal">À court, moyen et long terme</h2>
+    <div class="timeline-layout">
+      <div class="timeline-nav reveal">
+        <a href="#" class="timeline-nav-item active">Après intervention</a>
+        <a href="#" class="timeline-nav-item">À 2 ans</a>
+        <a href="#" class="timeline-nav-item">À 5 ans</a>
+        <a href="#" class="timeline-nav-item">À 15 ans</a>
+      </div>
+      <div class="timeline-steps">
+        <div class="timeline-step reveal">
+          <div class="step-horizon">
+            <span class="step-horizon-label">Horizon</span>
+            <div class="step-horizon-value">J+0</div>
+          </div>
+          <div>
+            <h3 class="step-title">Mesure immédiate de perception</h3>
+            <p class="step-desc">Cela permettrait de faire découvrir aux jeunes filles les domaines de la science : programmation, chimie, électronique...</p>
+            <span class="step-metric">Questionnaires standardisés validés</span>
+          </div>
+        </div>
+        <div class="timeline-step reveal">
+          <div class="step-horizon">
+            <span class="step-horizon-label">Horizon</span>
+            <div class="step-horizon-value">+2 ans</div>
+          </div>
+          <div>
+            <h3 class="step-title">Suivi des choix d'orientation</h3>
+            <p class="step-desc">Déconstruction des stéréotypes auprès des professeurs et élèves.</p>
+            <span class="step-metric">Comparaison groupes témoins</span>
+          </div>
+        </div>
+        <div class="timeline-step reveal">
+          <div class="step-horizon">
+            <span class="step-horizon-label">Horizon</span>
+            <div class="step-horizon-value">+5 ans</div>
+          </div>
+          <div>
+            <h3 class="step-title">Entrée dans les filières scientifiques</h3>
+            <p class="step-desc">Cela permettrait à une jeune fille de devenir une ingénieure sans douter, sans se questionner sur la légitimité d'appartenir </p>
+            <span class="step-metric">Taux d'inscription filières STEM</span>
+          </div>
+        </div>
+        <div class="timeline-step reveal">
+          <div class="step-horizon">
+            <span class="step-horizon-label">Horizon</span>
+            <div class="step-horizon-value">+15 ans</div>
+          </div>
+          <div>
+            <h3 class="step-title">Augmentation de la part des femmes ingénieures</h3>
+            <p class="step-desc">Contribuer à une augmentation mesurable de la part des femmes dans les écoles d'ingénieurs et les métiers de l'ingénierie en France.</p>
+            <span class="step-metric">Augmention du nombres de femmes en écoles d'ingénieurs et qui deviennent ingénieures.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEMOIGNAGES -->
+<section class="temoignages" id="temoignages">
+  <div class="container">
+    <p class="section-eyebrow reveal">Témoignages</p>
+    <h2 class="section-title reveal">Ce qu'ils disent de nous</h2>
+    <div class="temo-grid">
+      <div class="temo-card reveal">
+        <p class="temo-text">« Mes élèves n'avaient jamais rencontré une femme ingénieure en vrai. Après l'atelier, <em>trois filles m'ont dit vouloir faire de la chimie</em>. C'est énorme. »</p>
+        <div class="temo-author">
+          <div class="temo-avatar">S</div>
+          <div>
+            <p class="temo-name">Sophie M.</p>
+            <p class="temo-role">Professeure de sciences, collège Rennes</p>
+          </div>
+        </div>
+      </div>
+      <div class="temo-card reveal reveal-delay-1">
+        <p class="temo-text">« J'ai adoré faire l'atelier électronique. La grande sœur qui est venue avait fait pareil que moi à l'école. <em>Si elle peut, je peux.</em> »</p>
+        <div class="temo-author">
+          <div class="temo-avatar">L</div>
+          <div>
+            <p class="temo-name">Léa, 12 ans</p>
+            <p class="temo-role">Élève de 5e, Bordeaux</p>
+          </div>
+        </div>
+      </div>
+      <div class="temo-card reveal reveal-delay-2">
+        <p class="temo-text">« En tant que partenaire RSE, nous voyons un vrai retour. Les Curieuses touche directement les futures ingénieures de demain. <em>C'est un investissement qui compte.</em> »</p>
+        <div class="temo-author">
+          <div class="temo-avatar">M</div>
+          <div>
+            <p class="temo-name">Marc D.</p>
+            <p class="temo-role">Directeur RSE, partenaire entreprise</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OBJECTIF LONG TERME -->
+<section class="objectif">
+  <div class="container">
+    <div class="objectif-layout">
+      <div>
+        <p class="section-eyebrow reveal">L'enjeu économique</p>
+        <h2 class="section-title reveal">Des inégalités de carrière et de salaire</h2>
+        <p class="reveal">Les métiers de l'ingénierie sont parmi les mieux rémunérés en France, avec un salaire médian de 67 000 €/an contre 49 000 € pour l'ensemble des cadres.</p>
+        <p class="reveal">En excluant les femmes de ces filières par des stéréotypes de genre, c'est aussi une inégalité économique profonde que l'on reproduit. Les Curieuses, c'est agir à la source.</p>
+      </div>
+      <div class="reveal">
+        <div class="salaire-compare">
+          <div class="salaire-row">
+            <div class="salaire-label">
+              <span>Ingénieur·e</span>
+              <span style="font-weight:600; color: var(--violet);">67 000 €/an</span>
+            </div>
+            <div class="salaire-bar-bg"><div class="salaire-bar" data-width="87"></div></div>
+          </div>
+          <div class="salaire-row" style="margin-bottom: 0;">
+            <div class="salaire-label">
+              <span>Ensemble des cadres</span>
+              <span style="font-weight:600; color: var(--rose-deep);">49 000 €/an</span>
+            </div>
+            <div class="salaire-bar-bg"><div class="salaire-bar rose" data-width="63"></div></div>
+          </div>
+          <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 20px;">Source : APEC 2024 — salaires médians bruts annuels</p>
+        </div>
+        <div style="margin-top: 24px; text-align: center;">
+          <a href="contact.html" class="btn-primary">Rejoindre le mouvement</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/layout.js"></script>
+<script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const navbar = document.getElementById('navbar');
+    if (navbar) navbar.classList.add('solid');
+
+    // Animate salary bars
+    const bars = document.querySelectorAll('.salaire-bar[data-width]');
+    const barObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.width = e.target.dataset.width + '%';
+          barObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    bars.forEach(b => barObserver.observe(b));
+  });
+</script>
+</body>
+</html>

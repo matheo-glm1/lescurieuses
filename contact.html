@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Les Curieuses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  nav { background: var(--violet); }
+
+  /* TABS */
+  .tabs-section { background: var(--white); }
+  .tabs-header {
+    display: flex;
+    gap: 4px;
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 48px;
+    width: fit-content;
+  }
+  .tab-btn {
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    border: none;
+    background: none;
+    transition: background 0.15s, color 0.15s;
+    font-family: 'Inter', sans-serif;
+  }
+  .tab-btn.active {
+    background: var(--white);
+    color: var(--violet);
+    box-shadow: 0 1px 4px rgba(45,27,105,0.12);
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: grid; }
+
+  /* FORM LAYOUT */
+  .form-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .form-info h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.75rem;
+    color: var(--violet);
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+  .form-info p { color: var(--text-muted); line-height: 1.85; margin-bottom: 20px; }
+  .form-highlights { display: flex; flex-direction: column; gap: 14px; margin-top: 32px; }
+  .form-highlight {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: var(--violet-pale);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .highlight-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--rose-deep); flex-shrink: 0; margin-top: 6px; }
+  .highlight-text { font-size: 0.875rem; color: var(--violet); line-height: 1.6; }
+
+  /* FORM */
+  .contact-form { display: flex; flex-direction: column; gap: 20px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 0.8125rem; font-weight: 500; color: var(--text); }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 12px 16px;
+    border: 1.5px solid rgba(45,27,105,0.15);
+    border-radius: 10px;
+    font-size: 0.9375rem;
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--cream);
+    transition: border-color 0.15s, background 0.15s;
+    outline: none;
+    -webkit-appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--violet);
+    background: var(--white);
+    box-shadow: 0 0 0 4px rgba(45,27,105,0.06);
+  }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-group select { cursor: pointer; }
+  .form-required { color: var(--rose-deep); }
+  .form-submit {
+    background: var(--violet);
+    color: var(--white);
+    padding: 14px 36px;
+    border-radius: 100px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: transform 0.15s, box-shadow 0.15s;
+    align-self: flex-start;
+  }
+  .form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(45,27,105,0.25); }
+  .form-success {
+    display: none;
+    background: #EAF3DE;
+    color: #3B6D11;
+    border-radius: 12px;
+    padding: 20px 24px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  /* CONTACT DIRECT */
+  .contact-direct { background: var(--cream); }
+  .contact-direct-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .contact-item {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 32px 28px;
+    transition: transform 0.2s;
+  }
+  .contact-item:hover { transform: translateY(-4px); }
+  .contact-item-icon { font-size: 1.75rem; margin-bottom: 16px; }
+  .contact-item-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+  .contact-item-value { font-size: 1rem; font-weight: 500; color: var(--violet); margin-bottom: 8px; }
+  .contact-item a { color: var(--violet); text-decoration: none; transition: color 0.15s; }
+  .contact-item a:hover { color: var(--rose-deep); }
+  .contact-item-desc { font-size: 0.8125rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* FAQ */
+  .faq { background: var(--white); }
+  .faq-list { max-width: 760px; margin: 56px auto 0; display: flex; flex-direction: column; gap: 0; }
+  .faq-item { border-bottom: 1px solid rgba(45,27,105,0.08); }
+  .faq-item:first-child { border-top: 1px solid rgba(45,27,105,0.08); }
+  .faq-q {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 24px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--violet);
+    font-family: 'Inter', sans-serif;
+    text-align: left;
+    gap: 16px;
+  }
+  .faq-chevron {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--violet-pale);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem;
+    color: var(--violet);
+    flex-shrink: 0;
+    transition: transform 0.25s, background 0.15s;
+  }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); background: var(--violet); color: var(--white); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+  .faq-a-inner { padding: 0 0 24px; font-size: 0.9375rem; color: var(--text-muted); line-height: 1.8; }
+
+  @media (max-width: 768px) {
+    .form-layout { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .tabs-header { width: 100%; }
+    .tab-btn { flex: 1; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<div class="page-header">
+  <p class="page-header-eyebrow">Nous rejoindre</p>
+  <h1>Ensemble, on change<br><em>le cours des choses</em></h1>
+  <p class="page-header-sub">Que vous soyez un établissement scolaire, une entreprise, ou une étudiante ingénieure il y a une façon pour vous de rejoindre Les Curieuses.</p>
+</div>
+
+<!-- FORMULAIRES AVEC TABS -->
+<section class="tabs-section">
+  <div class="container">
+    <p class="section-eyebrow reveal">Nous contacter</p>
+    <h2 class="section-title reveal" style="margin-bottom: 40px;">Quelle est votre situation ?</h2>
+
+    <div class="tabs-header reveal" role="tablist">
+      <button class="tab-btn active" role="tab" data-tab="etablissement">Établissement scolaire</button>
+      <button class="tab-btn" role="tab" data-tab="partenaire">Entreprise partenaire</button>
+      <button class="tab-btn" role="tab" data-tab="intervenir">Devenir intervenante</button>
+    </div>
+
+    <!-- TAB: ETABLISSEMENT -->
+    <div class="tab-panel active form-layout" id="tab-etablissement">
+      <div class="form-info reveal">
+        <h3>Accueillez Les Curieuses dans votre école</h3>
+        <p>Le programme est payant pour les établissements. Nous nous adaptons à votre agenda et à vos niveaux scolaires.</p>
+        <div class="form-highlights">
+          <div class="form-highlight"><div class="highlight-dot"></div><div class="highlight-text">Intervention payant mais les déplacements sont pris en charge</div></div>
+          <div class="form-highlight"><div class="highlight-dot"></div><div class="highlight-text">Disponible du primaire au lycée</div></div>
+          <div class="form-highlight"><div class="highlight-dot"></div><div class="highlight-text">Formation des enseignants incluse</div></div>
+          <div class="form-highlight"><div class="highlight-dot"></div><div class="highlight-text">Matériel scientifique fourni</div></div>
+        </div>
+      </div>
+      <form class="contact-form reveal" id="form-etablissement">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Prénom <span class="form-required">*</span></label>
+            <input type="text" name="prenom" placeholder="Marie" required>
+          </div>
+          <div class="form-group">
+            <label>Nom <span class="form-required">*</span></label>
+            <input type="text" name="nom" placeholder="Dupont" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email professionnel <span class="form-required">*</span></label>
+          <input type="email" name="email" placeholder="m.dupont@ecole.fr" required>
+        </div>
+        <div class="form-group">
+          <label>Nom de l'établissement <span class="form-required">*</span></label>
+          <input type="text" name="etablissement" placeholder="Collège Jean Moulin, Bordeaux" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Niveau scolaire <span class="form-required">*</span></label>
+            <select name="niveau" required>
+              <option value="">Choisir...</option>
+              <option>Primaire (CE2–CM2)</option>
+              <option>Collège (6e–3e)</option>
+              <option>Lycée (2de–Tle)</option>
+              <option>Plusieurs niveaux</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Nombre d'élèves estimé</label>
+            <input type="number" name="eleves" placeholder="ex. 30">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Message (besoins particuliers, disponibilités...)</label>
+          <textarea name="message" placeholder="Nous sommes disponibles à partir de janvier, avec 2 classes de 4e..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Envoyer ma demande</button>
+        <div class="form-success" id="success-etablissement">
+          ✓ Votre demande a bien été envoyée ! Nous vous recontactons sous 48h pour organiser les modalités d'intervention.
+        </div>
+      </form>
+    </div>
+
+    <!-- TAB: PARTENAIRE -->
+    <div class="tab-panel form-layout" id="tab-partenaire">
+      <div class="form-info reveal">
+        <h3 id="partenaire">Engagez votre entreprise pour l'égalité</h3>
+        <p>Rejoignez les entreprises qui financent Les Curieuses dans le cadre de leur politique RSE. Un engagement concret, mesurable, et directement lié à l'égalité femmes-hommes.</p>
+        <div class="form-highlights">
+          <div class="form-highlight"><div class="highlight-dot"></div><div class="highlight-text">Mécénat avec reçu fiscal (réduction IS)</div></div>
+          <div class="form-highlight"><div class="highlight-dot"></div><div class="highlight-text">Prêt de matériel pédagogique valorisé</div></div>
+          <div class="form-highlight"><div class="highlight-dot"></div><div class="highlight-text">Rapports d'impact réguliers</div></div>
+          <div class="form-highlight"><div class="highlight-dot"></div><div class="highlight-text">Visibilité dans nos supports de communication</div></div>
+        </div>
+      </div>
+      <form class="contact-form" id="form-partenaire">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Prénom <span class="form-required">*</span></label>
+            <input type="text" placeholder="Marie" required>
+          </div>
+          <div class="form-group">
+            <label>Nom <span class="form-required">*</span></label>
+            <input type="text" placeholder="Dupont" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email professionnel <span class="form-required">*</span></label>
+          <input type="email" placeholder="m.dupont@entreprise.com" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Entreprise <span class="form-required">*</span></label>
+            <input type="text" placeholder="Ex. Airbus, Total Energies..." required>
+          </div>
+          <div class="form-group">
+            <label>Secteur</label>
+            <select>
+              <option value="">Choisir...</option>
+              <option>Énergie</option><option>Aéronautique</option><option>Chimie</option>
+              <option>Numérique</option><option>Génie civil</option><option>Autre</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Type de soutien envisagé</label>
+          <select>
+            <option value="">Choisir...</option>
+            <option>Mécénat financier</option>
+            <option>Prêt de matériel</option>
+            <option>Les deux</option>
+            <option>Je veux en savoir plus d'abord</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Dites-nous en plus sur votre démarche RSE et ce que vous envisagez..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Nous contacter</button>
+        <div class="form-success" id="success-partenaire">
+          ✓ Merci pour votre intérêt ! Notre responsable partenariats vous contactera sous 48h.
+        </div>
+      </form>
+    </div>
+
+    <!-- TAB: INTERVENIR -->
+    <div class="tab-panel form-layout" id="tab-intervenir">
+      <div class="form-info reveal">
+        <h3 id="intervenir">Devenez intervenante</h3>
+        <p>Vous êtes étudiante en école d'ingénieurs ou en master scientifique ? Rejoignez Les Curieuses en service civique et transmettez votre passion des sciences.</p>
+        <div class="form-highlights">
+          <div class="form-highlight"><div class="highlight-dot"></div><div class="highlight-text">Formation complète de 2 jours assurée</div></div>
+          <div class="form-highlight"><div class="highlight-dot"></div><div class="highlight-text">Déplacements remboursés</div></div>
+          <div class="form-highlight"><div class="highlight-dot"></div><div class="highlight-text">Certificat valorisable dans votre portfolio</div></div>
+          <div class="form-highlight"><div class="highlight-dot"></div><div class="highlight-text">2 à 5 interventions/mois selon disponibilité</div></div>
+        </div>
+      </div>
+      <form class="contact-form" id="form-intervenir">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Prénom <span class="form-required">*</span></label>
+            <input type="text" placeholder="Clara" required>
+          </div>
+          <div class="form-group">
+            <label>Nom <span class="form-required">*</span></label>
+            <input type="text" placeholder="Martin" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email <span class="form-required">*</span></label>
+          <input type="email" placeholder="clara.martin@student.ecole.fr" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>École / Université <span class="form-required">*</span></label>
+            <input type="text" placeholder="Ex. INSA Lyon, Polytechnique..." required>
+          </div>
+          <div class="form-group">
+            <label>Spécialité</label>
+            <select>
+              <option value="">Choisir...</option>
+              <option>Chimie</option><option>Génie civil</option><option>Informatique</option>
+              <option>Énergie</option><option>Biomédical</option><option>Aéronautique</option><option>Autre</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Année d'études</label>
+          <select>
+            <option value="">Choisir...</option>
+            <option>1ère année</option><option>2e année</option><option>3e année (ou plus)</option><option>Master / Doctorat</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Pourquoi voulez-vous rejoindre Les Curieuses ?</label>
+          <textarea placeholder="Parlez-nous de votre motivation..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Envoyer ma candidature</button>
+        <div class="form-success" id="success-intervenir">
+          ✓ Candidature reçue ! Nous revenons vers vous sous une semaine avec les prochaines étapes.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT DIRECT -->
+<section class="contact-direct">
+  <div class="container">
+    <p class="section-eyebrow reveal">Contact direct</p>
+    <h2 class="section-title reveal">Vous préférez nous écrire directement ?</h2>
+    <div class="contact-direct-grid">
+      <div class="contact-item reveal">
+        <div class="contact-item-icon">✉</div>
+        <p class="contact-item-label">Contact général</p>
+        <p class="contact-item-value"><a href="mailto:contact@lescurieuses.fr">contact@lescurieuses.fr</a></p>
+        <p class="contact-item-desc">Pour toute question générale sur le programme.</p>
+      </div>
+      <div class="contact-item reveal reveal-delay-1">
+        <div class="contact-item-icon">◈</div>
+        <p class="contact-item-label">Partenariats</p>
+        <p class="contact-item-value"><a href="mailto:partenariat@lescurieuses.fr">partenariat@lescurieuses.fr</a></p>
+        <p class="contact-item-desc">Pour les entreprises et fondations souhaitant nous soutenir.</p>
+      </div>
+      <div class="contact-item reveal reveal-delay-2">
+        <div class="contact-item-icon">✦</div>
+        <p class="contact-item-label">Presse</p>
+        <p class="contact-item-value"><a href="mailto:presse@lescurieuses.fr">presse@lescurieuses.fr</a></p>
+        <p class="contact-item-desc">Pour les journalistes et demandes d'interviews.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <div style="text-align: center;">
+      <p class="section-eyebrow reveal">FAQ</p>
+      <h2 class="section-title reveal">Questions fréquentes</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q">Le programme est-il vraiment gratuit pour notre école ?<span class="faq-chevron">▾</span></button>
+        <div class="faq-a"><p class="faq-a-inner">Non. Les interventions sont payantes mais les déplacements des intervenantes et le matériel scientifique sont pris en charge par le programme.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Combien de temps dure une intervention ?<span class="faq-chevron">▾</span></button>
+        <div class="faq-a"><p class="faq-a-inner">Une intervention standard dure 2 heures, dont environ 45 minutes d'atelier pratique, 45 minutes d'échanges et de témoignages, et 30 minutes de temps libre de questions. Nous pouvons aussi organiser des formats plus longs sur une journée complète.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">L'intervention concerne-t-elle uniquement les filles ?<span class="faq-chevron">▾</span></button>
+        <div class="faq-a"><p class="faq-a-inner">Non, nous intervenons auprès de classes mixtes. Travailler sur les stéréotypes de genre en présence de toute la classe est plus efficace les garçons sont aussi vecteurs de changement, et la déconstruction fonctionne mieux collectivement. Mais pendant 45 minutes une activité est dédié uniquement aux filles. Pendant que les garçons sont sensibilisés.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Combien de temps à l'avance faut-il réserver une intervention ?<span class="faq-chevron">▾</span></button>
+        <div class="faq-a"><p class="faq-a-inner">Nous recommandons de nous contacter au moins 3 semaines à l'avance pour pouvoir coordonner les intervenantes disponibles et préparer le matériel. En cas d'urgence, contactez-nous directement par email.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Comment puis-je savoir si le programme a eu de l'impact dans ma classe ?<span class="faq-chevron">▾</span></button>
+        <div class="faq-a"><p class="faq-a-inner">Nous fournissons des questionnaires standardisés à remplir avant et après l'intervention, ainsi qu'un compte-rendu d'impact envoyé sous 2 semaines. Vous recevez également un accès à nos données de suivi agrégées.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/layout.js"></script>
+<script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const navbar = document.getElementById('navbar');
+    if (navbar) navbar.classList.add('solid');
+
+    // Tabs
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    // Forms
+    ['etablissement', 'partenaire', 'intervenir'].forEach(id => {
+      const form = document.getElementById('form-' + id);
+      const success = document.getElementById('success-' + id);
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          form.style.display = 'none';
+          success.style.display = 'block';
+        });
+      }
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const answer = item.querySelector('.faq-a');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-a').style.maxHeight = null;
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+
+    // Handle hash navigation (e.g. contact.html#partenaire)
+    const hash = window.location.hash.replace('#', '');
+    if (hash === 'partenaire' || hash === 'intervenir') {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      const btn = document.querySelector(`[data-tab="${hash}"]`);
+      if (btn) {
+        btn.classList.add('active');
+        document.getElementById('tab-' + hash).classList.add('active');
+      }
+    }
+  });
+</script>
+</body>
+</html>
