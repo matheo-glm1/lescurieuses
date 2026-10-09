@@ -67,6 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const href = link.getAttribute('href');
     if (href && !href.startsWith('#') && !href.startsWith('mailto') && !href.startsWith('http')) {
       link.addEventListener('click', (e) => {
+        // Let the browser handle new-tab / modified clicks normally
+        if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button !== 0 || link.target === '_blank') return;
         e.preventDefault();
         document.body.style.opacity = '0';
         document.body.style.transition = 'opacity 0.25s ease';
@@ -80,6 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.style.transition = 'opacity 0.35s ease';
   requestAnimationFrame(() => {
     requestAnimationFrame(() => { document.body.style.opacity = '1'; });
+  });
+
+  // Restore visibility when the page comes back from the back/forward cache
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) document.body.style.opacity = '1';
   });
 
 });

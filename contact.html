@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Les Curieuses</title>
+<meta name="description" content="Accueillir une intervention, devenir partenaire ou intervenant.e : rejoignez Les Curieuses.">
+<meta property="og:title" content="Contact — Les Curieuses">
+<meta property="og:description" content="Accueillir une intervention, devenir partenaire ou intervenant.e : rejoignez Les Curieuses.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -194,7 +199,7 @@
 <div class="page-header">
   <p class="page-header-eyebrow">Nous rejoindre</p>
   <h1>Ensemble, on change<br><em>le cours des choses</em></h1>
-  <p class="page-header-sub">Que vous soyez un établissement scolaire, une entreprise, ou une étudiante ingénieure il y a une façon pour vous de rejoindre Les Curieuses.</p>
+  <p class="page-header-sub">Que vous soyez un établissement scolaire, une entreprise, ou une étudiante ingénieure, il y a une façon pour vous de rejoindre Les Curieuses.</p>
 </div>
 
 <!-- FORMULAIRES AVEC TABS -->
@@ -204,9 +209,9 @@
     <h2 class="section-title reveal" style="margin-bottom: 40px;">Quelle est votre situation ?</h2>
 
     <div class="tabs-header reveal" role="tablist">
-      <button class="tab-btn active" role="tab" data-tab="etablissement">Établissement scolaire</button>
-      <button class="tab-btn" role="tab" data-tab="partenaire">Entreprise partenaire</button>
-      <button class="tab-btn" role="tab" data-tab="intervenir">Devenir intervenante</button>
+      <button class="tab-btn active" role="tab" aria-selected="true" data-tab="etablissement">Établissement scolaire</button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="partenaire">Entreprise partenaire</button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="intervenir">Devenir intervenante</button>
     </div>
 
     <!-- TAB: ETABLISSEMENT -->
@@ -215,7 +220,7 @@
         <h3>Accueillez Les Curieuses dans votre école</h3>
         <p>Le programme est payant pour les établissements. Nous nous adaptons à votre agenda et à vos niveaux scolaires.</p>
         <div class="form-highlights">
-          <div class="form-highlight"><div class="highlight-dot"></div><div class="highlight-text">Intervention payant mais les déplacements sont pris en charge</div></div>
+          <div class="form-highlight"><div class="highlight-dot"></div><div class="highlight-text">Intervention payante, mais les déplacements sont pris en charge</div></div>
           <div class="form-highlight"><div class="highlight-dot"></div><div class="highlight-text">Disponible du primaire au lycée</div></div>
           <div class="form-highlight"><div class="highlight-dot"></div><div class="highlight-text">Formation des enseignants incluse</div></div>
           <div class="form-highlight"><div class="highlight-dot"></div><div class="highlight-text">Matériel scientifique fourni</div></div>
@@ -261,6 +266,7 @@
           <textarea name="message" placeholder="Nous sommes disponibles à partir de janvier, avec 2 classes de 4e..."></textarea>
         </div>
         <button type="submit" class="form-submit">Envoyer ma demande</button>
+        <p class="form-consent" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 12px;">Vos données servent uniquement à traiter votre demande. Voir notre <a href="confidentialite.html" style="color: inherit;">politique de confidentialité</a>.</p>
         <div class="form-success" id="success-etablissement">
           ✓ Votre demande a bien été envoyée ! Nous vous recontactons sous 48h pour organiser les modalités d'intervention.
         </div>
@@ -283,25 +289,25 @@
         <div class="form-row">
           <div class="form-group">
             <label>Prénom <span class="form-required">*</span></label>
-            <input type="text" placeholder="Marie" required>
+            <input name="prenom" type="text" placeholder="Marie" required>
           </div>
           <div class="form-group">
             <label>Nom <span class="form-required">*</span></label>
-            <input type="text" placeholder="Dupont" required>
+            <input name="nom" type="text" placeholder="Dupont" required>
           </div>
         </div>
         <div class="form-group">
           <label>Email professionnel <span class="form-required">*</span></label>
-          <input type="email" placeholder="m.dupont@entreprise.com" required>
+          <input name="email" type="email" placeholder="m.dupont@entreprise.com" required>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label>Entreprise <span class="form-required">*</span></label>
-            <input type="text" placeholder="Ex. Airbus, Total Energies..." required>
+            <input name="entreprise" type="text" placeholder="Ex. Airbus, Total Energies..." required>
           </div>
           <div class="form-group">
             <label>Secteur</label>
-            <select>
+            <select name="secteur">
               <option value="">Choisir...</option>
               <option>Énergie</option><option>Aéronautique</option><option>Chimie</option>
               <option>Numérique</option><option>Génie civil</option><option>Autre</option>
@@ -310,7 +316,7 @@
         </div>
         <div class="form-group">
           <label>Type de soutien envisagé</label>
-          <select>
+          <select name="soutien">
             <option value="">Choisir...</option>
             <option>Mécénat financier</option>
             <option>Prêt de matériel</option>
@@ -320,9 +326,10 @@
         </div>
         <div class="form-group">
           <label>Message</label>
-          <textarea placeholder="Dites-nous en plus sur votre démarche RSE et ce que vous envisagez..."></textarea>
+          <textarea name="message" placeholder="Dites-nous en plus sur votre démarche RSE et ce que vous envisagez..."></textarea>
         </div>
         <button type="submit" class="form-submit">Nous contacter</button>
+        <p class="form-consent" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 12px;">Vos données servent uniquement à traiter votre demande. Voir notre <a href="confidentialite.html" style="color: inherit;">politique de confidentialité</a>.</p>
         <div class="form-success" id="success-partenaire">
           ✓ Merci pour votre intérêt ! Notre responsable partenariats vous contactera sous 48h.
         </div>
@@ -345,25 +352,25 @@
         <div class="form-row">
           <div class="form-group">
             <label>Prénom <span class="form-required">*</span></label>
-            <input type="text" placeholder="Clara" required>
+            <input name="prenom" type="text" placeholder="Clara" required>
           </div>
           <div class="form-group">
             <label>Nom <span class="form-required">*</span></label>
-            <input type="text" placeholder="Martin" required>
+            <input name="nom" type="text" placeholder="Martin" required>
           </div>
         </div>
         <div class="form-group">
           <label>Email <span class="form-required">*</span></label>
-          <input type="email" placeholder="clara.martin@student.ecole.fr" required>
+          <input name="email" type="email" placeholder="clara.martin@student.ecole.fr" required>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label>École / Université <span class="form-required">*</span></label>
-            <input type="text" placeholder="Ex. INSA Lyon, Polytechnique..." required>
+            <input name="ecole" type="text" placeholder="Ex. INSA Lyon, Polytechnique..." required>
           </div>
           <div class="form-group">
             <label>Spécialité</label>
-            <select>
+            <select name="specialite">
               <option value="">Choisir...</option>
               <option>Chimie</option><option>Génie civil</option><option>Informatique</option>
               <option>Énergie</option><option>Biomédical</option><option>Aéronautique</option><option>Autre</option>
@@ -372,16 +379,17 @@
         </div>
         <div class="form-group">
           <label>Année d'études</label>
-          <select>
+          <select name="annee">
             <option value="">Choisir...</option>
             <option>1ère année</option><option>2e année</option><option>3e année (ou plus)</option><option>Master / Doctorat</option>
           </select>
         </div>
         <div class="form-group">
           <label>Pourquoi voulez-vous rejoindre Les Curieuses ?</label>
-          <textarea placeholder="Parlez-nous de votre motivation..."></textarea>
+          <textarea name="motivation" placeholder="Parlez-nous de votre motivation..."></textarea>
         </div>
         <button type="submit" class="form-submit">Envoyer ma candidature</button>
+        <p class="form-consent" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 12px;">Vos données servent uniquement à traiter votre demande. Voir notre <a href="confidentialite.html" style="color: inherit;">politique de confidentialité</a>.</p>
         <div class="form-success" id="success-intervenir">
           ✓ Candidature reçue ! Nous revenons vers vous sous une semaine avec les prochaines étapes.
         </div>
@@ -399,19 +407,19 @@
       <div class="contact-item reveal">
         <div class="contact-item-icon">✉</div>
         <p class="contact-item-label">Contact général</p>
-        <p class="contact-item-value"><a href="mailto:contact@lescurieuses.fr">contact@lescurieuses.fr</a></p>
+        <p class="contact-item-value"><a href="mailto:lescurieuses2026@gmail.com">lescurieuses2026@gmail.com</a></p>
         <p class="contact-item-desc">Pour toute question générale sur le programme.</p>
       </div>
       <div class="contact-item reveal reveal-delay-1">
         <div class="contact-item-icon">◈</div>
         <p class="contact-item-label">Partenariats</p>
-        <p class="contact-item-value"><a href="mailto:partenariat@lescurieuses.fr">partenariat@lescurieuses.fr</a></p>
+        <p class="contact-item-value"><a href="mailto:lescurieuses2026@gmail.com">lescurieuses2026@gmail.com</a></p>
         <p class="contact-item-desc">Pour les entreprises et fondations souhaitant nous soutenir.</p>
       </div>
       <div class="contact-item reveal reveal-delay-2">
         <div class="contact-item-icon">✦</div>
         <p class="contact-item-label">Presse</p>
-        <p class="contact-item-value"><a href="mailto:presse@lescurieuses.fr">presse@lescurieuses.fr</a></p>
+        <p class="contact-item-value"><a href="mailto:lescurieuses2026@gmail.com">lescurieuses2026@gmail.com</a></p>
         <p class="contact-item-desc">Pour les journalistes et demandes d'interviews.</p>
       </div>
     </div>
@@ -461,24 +469,61 @@
     // Tabs
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
         document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
         btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
         document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
       });
     });
 
     // Forms
+    // FORM_ENDPOINT : URL d'un service d'envoi (Formspree, Web3Forms...).
+    // Tant qu'il est vide, l'envoi ouvre la messagerie de l'utilisateur vers CONTACT_EMAIL.
+    const FORM_ENDPOINT = '';
+    const CONTACT_EMAIL = 'lescurieuses2026@gmail.com';
+    const FORM_SUBJECTS = {
+      etablissement: "Demande d'intervention",
+      partenaire: 'Demande de partenariat',
+      intervenir: 'Candidature intervenant.e'
+    };
+
     ['etablissement', 'partenaire', 'intervenir'].forEach(id => {
       const form = document.getElementById('form-' + id);
       const success = document.getElementById('success-' + id);
-      if (form) {
-        form.addEventListener('submit', (e) => {
-          e.preventDefault();
-          form.style.display = 'none';
-          success.style.display = 'block';
-        });
-      }
+      if (!form) return;
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = new FormData(form);
+        data.append('formulaire', FORM_SUBJECTS[id]);
+        const submitBtn = form.querySelector('[type="submit"]');
+
+        if (FORM_ENDPOINT) {
+          if (submitBtn) submitBtn.disabled = true;
+          try {
+            const res = await fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+            if (!res.ok) throw new Error(res.status);
+          } catch (err) {
+            if (submitBtn) submitBtn.disabled = false;
+            alert("L'envoi a échoué. Vous pouvez nous écrire directement à " + CONTACT_EMAIL);
+            return;
+          }
+        } else {
+          const lines = [];
+          form.querySelectorAll('[name]').forEach(field => {
+            if (field.value) {
+              const label = field.closest('.form-group')?.querySelector('label')?.textContent.replace('*', '').trim() || field.name;
+              lines.push(label + ' : ' + field.value);
+            }
+          });
+          window.location.href = 'mailto:' + CONTACT_EMAIL
+            + '?subject=' + encodeURIComponent(FORM_SUBJECTS[id] + ' — site Les Curieuses')
+            + '&body=' + encodeURIComponent(lines.join('\n'));
+        }
+
+        form.style.display = 'none';
+        success.style.display = 'block';
+      });
     });
 
     // FAQ accordion
@@ -505,7 +550,9 @@
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
       const btn = document.querySelector(`[data-tab="${hash}"]`);
       if (btn) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.setAttribute('aria-selected', 'false'));
         btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
         document.getElementById('tab-' + hash).classList.add('active');
       }
     }
