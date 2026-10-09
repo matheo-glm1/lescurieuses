@@ -478,10 +478,10 @@
     });
 
     // Forms
-    // FORM_ENDPOINT : URL d'un service d'envoi (Formspree, Web3Forms...).
-    // Tant qu'il est vide, l'envoi ouvre la messagerie de l'utilisateur vers CONTACT_EMAIL.
-    const FORM_ENDPOINT = '';
+    // Les demandes sont envoyées par FormSubmit (formsubmit.co) directement sur CONTACT_EMAIL.
+    // Au tout premier envoi, FormSubmit envoie un email d'activation à cette adresse : il faut cliquer sur le lien.
     const CONTACT_EMAIL = 'lescurieuses2026@gmail.com';
+    const FORM_ENDPOINT = 'https://formsubmit.co/ajax/' + CONTACT_EMAIL;
     const FORM_SUBJECTS = {
       etablissement: "Demande d'intervention",
       partenaire: 'Demande de partenariat',
@@ -496,33 +496,27 @@
         e.preventDefault();
         const data = new FormData(form);
         data.append('formulaire', FORM_SUBJECTS[id]);
+        data.append('_subject', FORM_SUBJECTS[id] + ' — site Les Curieuses');
+        data.append('_template', 'table');
+        if (data.get('email')) data.append('_replyto', data.get('email'));
         const submitBtn = form.querySelector('[type="submit"]');
+        const btnLabel = submitBtn ? submitBtn.textContent : '';
 
-        if (FORM_ENDPOINT) {
-          if (submitBtn) submitBtn.disabled = true;
-          try {
-            const res = await fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
-            if (!res.ok) throw new Error(res.status);
-          } catch (err) {
-            if (submitBtn) submitBtn.disabled = false;
-            alert("L'envoi a échoué. Vous pouvez nous écrire directement à " + CONTACT_EMAIL);
-            return;
-          }
-        } else {
-          const lines = [];
-          form.querySelectorAll('[name]').forEach(field => {
-            if (field.value) {
-              const label = field.closest('.form-group')?.querySelector('label')?.textContent.replace('*', '').trim() || field.name;
-              lines.push(label + ' : ' + field.value);
-            }
-          });
-          window.location.href = 'mailto:' + CONTACT_EMAIL
-            + '?subject=' + encodeURIComponent(FORM_SUBJECTS[id] + ' — site Les Curieuses')
-            + '&body=' + encodeURIComponent(lines.join('\n'));
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Envoi en cours...'; }
+        try {
+          const res = await fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+          const json = await res.json().catch(() => ({}));
+          if (!res.ok || json.success === 'false' || json.success === false) throw new Error(json.message || res.status);
+        } catch (err) {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = btnLabel; }
+          alert("L'envoi a échoué. Vous pouvez nous écrire directement à " + CONTACT_EMAIL);
+          return;
         }
 
-        form.style.display = 'none';
+        // Le message de succès est dans le formulaire : on cache les champs, pas le formulaire entier
+        [...form.children].forEach(child => { if (child !== success) child.style.display = 'none'; });
         success.style.display = 'block';
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
     });
 
