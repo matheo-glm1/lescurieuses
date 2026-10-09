@@ -513,8 +513,10 @@
           return;
         }
 
-        form.style.display = 'none';
+        // Le message de succès est dans le formulaire : on cache les champs, pas le formulaire entier
+        [...form.children].forEach(child => { if (child !== success) child.style.display = 'none'; });
         success.style.display = 'block';
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
     });
 
