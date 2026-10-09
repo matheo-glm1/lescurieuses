@@ -44,15 +44,15 @@ const FOOTER_HTML = `
         <li><a href="contact.html">Accueillir une intervention</a></li>
         <li><a href="contact.html#partenaire">Devenir partenaire</a></li>
         <li><a href="contact.html#intervenir">Intervenir</a></li>
-        <li><a href="mailto:contact@lescurieuses.fr">Contact direct</a></li>
+        <li><a href="mailto:lescurieuses2026@gmail.com">Contact direct</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p class="footer-copy">© 2025 Les Curieuses. Tous droits réservés.</p>
+    <p class="footer-copy">© ${new Date().getFullYear()} Les Curieuses. Tous droits réservés.</p>
     <div class="footer-legal">
-      <a href="#">Mentions légales</a>
-      <a href="#">Politique de confidentialité</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Politique de confidentialité</a>
     </div>
   </div>
 </footer>`;
