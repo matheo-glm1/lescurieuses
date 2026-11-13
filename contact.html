@@ -11,6 +11,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://formsubmit.co" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <style>
@@ -444,7 +445,7 @@
       </div>
       <div class="faq-item reveal">
         <button class="faq-q">L'intervention concerne-t-elle uniquement les filles ?<span class="faq-chevron">▾</span></button>
-        <div class="faq-a"><p class="faq-a-inner">Non, nous intervenons auprès de classes mixtes. Travailler sur les stéréotypes de genre en présence de toute la classe est plus efficace les garçons sont aussi vecteurs de changement, et la déconstruction fonctionne mieux collectivement. Mais pendant 45 minutes une activité est dédié uniquement aux filles. Pendant que les garçons sont sensibilisés.</p></div>
+        <div class="faq-a"><p class="faq-a-inner">Non, nous intervenons auprès de classes mixtes. Nous choisissons de travailler sur les stéréotypes de genre avec toute la classe : les garçons sont aussi vecteurs de changement, et nous pensons que la déconstruction fonctionne mieux collectivement. Mais pendant 45 minutes une activité est dédié uniquement aux filles. Pendant que les garçons sont sensibilisés.</p></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-q">Combien de temps à l'avance faut-il réserver une intervention ?<span class="faq-chevron">▾</span></button>
@@ -499,24 +500,26 @@
         data.append('_subject', FORM_SUBJECTS[id] + ' — site Les Curieuses');
         data.append('_template', 'table');
         if (data.get('email')) data.append('_replyto', data.get('email'));
-        const submitBtn = form.querySelector('[type="submit"]');
-        const btnLabel = submitBtn ? submitBtn.textContent : '';
+        const fields = [...form.children].filter(child => child !== success);
 
-        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Envoi en cours...'; }
+        // Confirmation affichée tout de suite ; l'envoi se termine en arrière-plan.
+        // Le message de succès est dans le formulaire : on cache les champs, pas le formulaire entier
+        fields.forEach(child => { child.style.display = 'none'; });
+        success.style.display = 'block';
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
         try {
-          const res = await fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+          // keepalive : l'envoi continue même si le visiteur quitte la page
+          const res = await fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { 'Accept': 'application/json' }, keepalive: true });
           const json = await res.json().catch(() => ({}));
           if (!res.ok || json.success === 'false' || json.success === false) throw new Error(json.message || res.status);
         } catch (err) {
-          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = btnLabel; }
-          alert("L'envoi a échoué. Vous pouvez nous écrire directement à " + CONTACT_EMAIL);
-          return;
+          // En cas d'échec, on réaffiche le formulaire rempli pour que rien ne soit perdu
+          console.error('Envoi du formulaire échoué :', err.message);
+          success.style.display = 'none';
+          fields.forEach(child => { child.style.display = ''; });
+          alert("L'envoi a échoué. Vous pouvez réessayer ou nous écrire directement à " + CONTACT_EMAIL);
         }
-
-        // Le message de succès est dans le formulaire : on cache les champs, pas le formulaire entier
-        [...form.children].forEach(child => { if (child !== success) child.style.display = 'none'; });
-        success.style.display = 'block';
-        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
     });
 
