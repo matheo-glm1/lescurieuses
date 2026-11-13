@@ -35,7 +35,6 @@ const FOOTER_HTML = `
         <li><a href="equipe.html">L'équipe</a></li>
         <li><a href="impact.html">Notre impact</a></li>
         <li><a href="impact.html#chiffres">Les chiffres</a></li>
-        <li><a href="impact.html#temoignages">Témoignages</a></li>
       </ul>
     </div>
     <div class="footer-col">
